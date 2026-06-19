@@ -20,7 +20,7 @@ export default function PrivacyPage() {
 
             <div>
               <h2 className="font-display text-xl text-[var(--color-cream)] uppercase mb-3">1. Who We Are</h2>
-              <p>Agence EMEA FZ-LLC is a digital agency registered in Dubai Design District, United Arab Emirates. References to "we", "us", and "our" refer to Agence EMEA.</p>
+              <p>Agence EMEA FZ-LLC is a digital agency registered in Dubai Design District, United Arab Emirates. References to &ldquo;we&rdquo;, &ldquo;us&rdquo;, and &ldquo;our&rdquo; refer to Agence EMEA.</p>
             </div>
 
             <div>

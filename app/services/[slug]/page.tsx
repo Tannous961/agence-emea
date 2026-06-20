@@ -1,9 +1,11 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
-import { services, getServiceBySlug } from '@/lib/data/services';
+import { services, getServiceBySlug, getRelatedServices } from '@/lib/data/services';
+import { getServiceHeroTheme } from '@/lib/data/hero-themes';
+import { BRAND } from '@/lib/constants/brand';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { DetailPageHero } from '@/components/sections/DetailPageHero';
 import { CtaSection } from '@/components/sections/CtaSection';
 
 interface Props {
@@ -19,9 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = getServiceBySlug(slug);
   if (!service) return {};
   return {
-    title: `${service.title} — Agence EMEA`,
+    title: service.title,
     description: service.description,
-    alternates: { canonical: `https://agence-emea.com/services/${slug}` },
+    alternates: { canonical: `${BRAND.url}/services/${slug}` },
   };
 }
 
@@ -30,87 +32,108 @@ export default async function ServicePage({ params }: Props) {
   const service = getServiceBySlug(slug);
   if (!service) notFound();
 
+  const related = getRelatedServices(slug);
+  const theme = getServiceHeroTheme(slug);
+
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-[#F5F5F5] pt-44 pb-24 overflow-hidden border-b border-black/[0.05]">
-        {/* Background image, very dark */}
-        <div className="absolute inset-0 z-0">
-          <Image src={service.image} alt="" fill className="object-cover opacity-[0.08] grayscale" sizes="100vw" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/90 to-[#080808]/60" />
-        </div>
-        <div className="relative z-10 container-site">
+      <DetailPageHero
+        eyebrow="Service"
+        title={service.title}
+        tagline={service.tagline}
+        description={service.description}
+        theme={theme}
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Services', href: '/services' },
+          { label: service.title },
+        ]}
+      />
+
+      <section className="bg-[#F5F5F5] section-pad border-b border-black/[0.05]">
+        <div className="container-site grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           <ScrollReveal>
-            <Link href="/services"
-              className="inline-flex items-center gap-3 font-body font-light uppercase text-[var(--color-cream)]/30 hover:text-[#0000FF] mb-10 transition-colors duration-300"
-              style={{ fontSize: '0.72rem', letterSpacing: '0.3em' }}>
-              <span className="w-4 h-px bg-current" /> All Services
-            </Link>
-          </ScrollReveal>
-          <ScrollReveal delay={0.05}>
-            <div className="flex items-center gap-4 mb-8">
-              <span className="w-4 h-px bg-[#0000FF]" />
-              <span className="font-body font-light uppercase text-[#0000FF]/60"
-                style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}>
-                Service
+            <div>
+              <span
+                className="block font-body font-light uppercase text-ink-meta mb-6"
+                style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}
+              >
+                How We Deliver
               </span>
+              <ul className="space-y-5">
+                {service.highlights.map((item) => (
+                  <li key={item} className="flex items-start gap-4">
+                    <span className="shrink-0 w-1.5 h-1.5 rounded-full bg-[#0000FF] mt-2" />
+                    <p className="font-body font-light text-ink-body leading-relaxed" style={{ fontSize: '1rem' }}>
+                      {item}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
           </ScrollReveal>
-          <ScrollReveal delay={0.08}>
-            <h1 className="font-display font-semibold uppercase text-[var(--color-cream)]"
-              style={{ fontSize: 'clamp(2.8rem, 7vw, 7rem)', lineHeight: 0.92, letterSpacing: '-0.025em', maxWidth: '14ch' }}>
-              {service.title}
-            </h1>
-          </ScrollReveal>
-          <ScrollReveal delay={0.12}>
-            <p className="mt-4 font-display font-semibold uppercase"
-              style={{ fontSize: 'clamp(1rem, 2vw, 1.8rem)', letterSpacing: '-0.01em', WebkitTextStroke: '1px rgba(0,0,255,0.5)', color: 'transparent' }}>
-              {service.tagline}
-            </p>
-          </ScrollReveal>
-          <ScrollReveal delay={0.18}>
-            <p className="mt-7 font-body font-light text-[var(--color-cream)]/45 max-w-xl leading-relaxed"
-              style={{ fontSize: '1.06rem' }}>
-              {service.description}
-            </p>
-          </ScrollReveal>
-          <ScrollReveal delay={0.25}>
-            <Link href="/contact"
-              className="mt-10 inline-flex items-center gap-4 font-body font-light uppercase text-[var(--color-cream)]/50 hover:text-[#0000FF] transition-all duration-300 hover:gap-6"
-              style={{ fontSize: '0.78rem', letterSpacing: '0.3em' }}>
-              Discuss Your Project
-              <span className="w-6 h-px bg-current" />
-            </Link>
+          <ScrollReveal delay={0.1}>
+            <div>
+              <span
+                className="block font-body font-light uppercase text-ink-meta mb-6"
+                style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}
+              >
+                What&apos;s Included
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {service.features.map((f) => (
+                  <span
+                    key={f}
+                    className="font-body font-light text-ink-meta border border-black/[0.07] px-3 py-1.5"
+                    style={{ fontSize: '0.74rem', letterSpacing: '0.12em' }}
+                  >
+                    {f}
+                  </span>
+                ))}
+              </div>
+              <Link
+                href="/work"
+                className="mt-10 inline-flex items-center gap-3 font-body font-light uppercase text-ink-body hover:text-[#0000FF] transition-colors duration-300 min-h-[44px]"
+                style={{ fontSize: '0.72rem', letterSpacing: '0.28em' }}
+              >
+                See Our Work
+                <span className="w-5 h-px bg-current" />
+              </Link>
+            </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* What is included */}
-      <section className="bg-[#F5F5F5] section-pad" aria-label="Service features">
+      <section className="bg-[#F0F0F0] py-24 border-b border-black/[0.05]" aria-label="Related services">
         <div className="container-site">
           <ScrollReveal>
-            <div className="flex items-center gap-4 mb-16">
-              <span className="w-4 h-px bg-[#0000FF]" />
-              <span className="font-body font-light uppercase text-[var(--color-cream)]/40"
-                style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}>
-                What&apos;s Included
-              </span>
-            </div>
-            <h2 className="font-display font-semibold uppercase text-[var(--color-cream)] mb-16"
-              style={{ fontSize: 'clamp(2rem, 4vw, 3.8rem)', letterSpacing: '-0.02em', lineHeight: 0.92 }}>
-              The Full Scope.
+            <h2
+              className="font-display font-semibold uppercase text-[var(--color-cream)] mb-12"
+              style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', letterSpacing: '-0.02em' }}
+            >
+              Related Services
             </h2>
           </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-black/[0.05]">
-            {service.features.map((feature, i) => (
-              <ScrollReveal key={feature} delay={Math.min(i * 0.06, 0.28)}>
-                <div className="bg-[#F5F5F5] p-8 md:p-10 flex items-start gap-5 group hover:bg-[#EDEDED] transition-colors duration-300">
-                  <span className="shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full bg-[#0000FF]" />
-                  <span className="font-body font-light text-[var(--color-cream)]/60 group-hover:text-[var(--color-cream)]/80 transition-colors leading-relaxed"
-                    style={{ fontSize: '1.02rem' }}>
-                    {feature}
-                  </span>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-black/[0.05]">
+            {related.map((item, i) => (
+              <ScrollReveal key={item.slug} delay={i * 0.05}>
+                <Link
+                  href={`/services/${item.slug}`}
+                  className="block bg-[#F0F0F0] p-8 hover:bg-[#E8E8E8] transition-colors duration-300 group h-full"
+                >
+                  <p
+                    className="font-display font-semibold uppercase text-[var(--color-cream)] group-hover:text-[#0000FF] transition-colors duration-300"
+                    style={{ fontSize: '1.1rem', letterSpacing: '-0.01em', lineHeight: 0.95 }}
+                  >
+                    {item.shortTitle}
+                  </p>
+                  <p
+                    className="mt-3 font-body font-light text-ink-meta leading-relaxed line-clamp-2"
+                    style={{ fontSize: '0.88rem' }}
+                  >
+                    {item.tagline}
+                  </p>
+                </Link>
               </ScrollReveal>
             ))}
           </div>

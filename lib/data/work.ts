@@ -33,7 +33,7 @@ export const caseStudies: CaseStudy[] = [
     slug: 'saudi-logistics-digital',
     title: 'Digital Transformation at Scale',
     client: 'Majd Logistics',
-    category: 'AI & Automation / Cloud & DevOps',
+    category: 'AI & Automation',
     year: '2024',
     description:
       'Enterprise-grade operational efficiency transformation for a Saudi logistics operator — cutting costs by 22% and doubling shipment capacity without adding headcount.',
@@ -61,7 +61,7 @@ export const caseStudies: CaseStudy[] = [
     slug: 'fintech-africa',
     title: 'Building the Future of African Fintech',
     client: 'Pesa Flow',
-    category: 'UX/UI Design / Mobile Apps',
+    category: 'Mobile Apps',
     year: '2023',
     description:
       'A mobile-first remittance and savings platform built for underbanked communities across Sub-Saharan Africa.',

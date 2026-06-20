@@ -1,15 +1,14 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import { offices } from '@/lib/data/clients';
+import { BRAND } from '@/lib/constants/brand';
 
 const nav = {
   Services: [
+    { label: 'AI & Automation',   href: '/services/ai-automation' },
     { label: 'Brand Strategy',    href: '/services/brand-strategy' },
     { label: 'Web Development',   href: '/services/web-development' },
     { label: 'Mobile Apps',       href: '/services/mobile-apps' },
     { label: 'Digital Marketing', href: '/services/digital-marketing' },
-    { label: 'AI & Automation',   href: '/services/ai-automation' },
-    { label: 'UX/UI Design',      href: '/services/ux-ui-design' },
-    { label: 'Cloud & DevOps',    href: '/services/cloud-devops' },
   ],
   Company: [
     { label: 'Work',       href: '/work' },
@@ -18,17 +17,18 @@ const nav = {
     { label: 'Insights',   href: '/insights' },
     { label: 'Contact',    href: '/contact' },
     { label: 'Privacy',    href: '/privacy' },
+    { label: 'Terms',      href: '/terms' },
   ],
 };
 
 const socials = [
-  { label: 'LinkedIn',     href: '#', abbr: 'LI' },
-  { label: 'Instagram',    href: '#', abbr: 'IG' },
-  { label: 'X (Twitter)',  href: '#', abbr: 'X' },
+  { label: 'LinkedIn (coming soon)',  abbr: 'LI' },
+  { label: 'Instagram (coming soon)', abbr: 'IG' },
+  { label: 'X / Twitter (coming soon)', abbr: 'X' },
 ];
 
-const labelCls = 'text-[0.68rem] font-body font-light uppercase tracking-[0.32em] text-[var(--color-cream)]/25 block mb-6';
-const linkCls  = 'block font-body font-light text-[var(--color-cream)]/45 hover:text-[var(--color-cream)] focus-visible:text-[#0000FF] transition-colors duration-300 mb-3 outline-none';
+const labelCls = 'text-eyebrow text-ink-meta block mb-6';
+const linkCls  = 'block font-body text-ink-body hover:text-[var(--color-cream)] focus-visible:text-blue-link transition-colors duration-300 mb-3 outline-none focus-visible:ring-2 focus-visible:ring-blue-link focus-visible:ring-offset-2';
 const linkStyle = { fontSize: '0.95rem' };
 
 export function Footer() {
@@ -43,25 +43,22 @@ export function Footer() {
           <div className="col-span-2 lg:col-span-1">
             <Link
               href="/"
-              className="font-display font-semibold text-[var(--color-cream)] text-lg uppercase tracking-[0.2em] hover:text-[#0000FF] transition-colors duration-300 block mb-5"
+              className="font-display font-semibold text-[var(--color-cream)] text-lg uppercase tracking-[0.2em] hover:text-blue-link transition-colors duration-300 block mb-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-link focus-visible:ring-offset-2"
             >
-              B&amp;B Agency<span className="text-[#0000FF]">.</span>
+              {BRAND.name}<span className="text-blue-accent">.</span>
             </Link>
-            <p className="font-body font-light text-[var(--color-cream)]/35 leading-relaxed max-w-[200px]"
-              style={{ fontSize: '0.92rem' }}>
-              Premium digital agency for the Middle East and Africa.
+            <p className="font-body text-ink-body leading-relaxed max-w-[200px] text-caption-a11y">
+              {BRAND.tagline}
             </p>
             <nav aria-label="Social links" className="flex gap-5 mt-7">
-              {socials.map(({ label, href, abbr }) => (
-                <a
+              {socials.map(({ label, abbr }) => (
+                <span
                   key={label}
-                  href={href}
                   aria-label={label}
-                  className="text-[0.72rem] font-body font-light uppercase tracking-[0.22em] text-[var(--color-cream)]/25 hover:text-[#0000FF] focus-visible:text-[#0000FF] transition-colors outline-none"
-                  rel="noopener noreferrer"
+                  className="text-eyebrow text-ink-muted/60 min-w-[44px] min-h-[44px] inline-flex items-center select-none"
                 >
                   {abbr}
-                </a>
+                </span>
               ))}
             </nav>
           </div>
@@ -83,12 +80,11 @@ export function Footer() {
             <span className={labelCls}>Offices</span>
             {offices.map((o) => (
               <address key={o.city} className="not-italic mb-4">
-                <span className="block font-body font-light text-[var(--color-cream)]/45"
-                  style={{ fontSize: '0.95rem' }}>
+                <span className="block font-body text-ink-body text-caption-a11y">
                   {o.city}
                 </span>
-                <span className="block font-body font-light text-[var(--color-cream)]/22 mt-0.5"
-                  style={{ fontSize: '0.78rem', letterSpacing: '0.06em' }}>
+                <span className="block font-body text-ink-meta mt-0.5 text-caption-a11y"
+                  style={{ letterSpacing: '0.06em' }}>
                   {o.country} · {o.timezone}
                 </span>
               </address>
@@ -97,14 +93,13 @@ export function Footer() {
         </div>
 
         <div className="border-t border-black/[0.05] pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <p className="font-body font-light text-[var(--color-cream)]/20"
-            style={{ fontSize: '0.76rem', letterSpacing: '0.12em' }}>
-            <span aria-hidden="true">© </span>{year} Agence EMEA. All rights reserved.
+          <p className="font-body text-ink-meta text-caption-a11y"
+            style={{ letterSpacing: '0.12em' }}>
+            <span aria-hidden="true">© </span>{year} {BRAND.name}. All rights reserved.
           </p>
-          <p className="font-body font-light text-[var(--color-cream)]/14 uppercase"
-            style={{ fontSize: '0.66rem', letterSpacing: '0.32em' }}
+          <p className="font-body text-ink-muted text-eyebrow"
             aria-label="Office locations">
-            Dubai · Riyadh · Cairo · Nairobi · Casablanca
+            Beirut · Lagos · Dubai · Riyadh
           </p>
         </div>
       </div>

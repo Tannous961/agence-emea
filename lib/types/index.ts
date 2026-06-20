@@ -5,7 +5,9 @@ export interface Service {
   tagline: string;
   description: string;
   features: string[];
+  highlights: string[];
   image: string;
+  imageAlt: string;
 }
 
 export interface CaseStudy {
@@ -66,4 +68,21 @@ export interface Testimonial {
 export interface Client {
   name: string;
   logo: string;
+}
+
+export interface Industry {
+  slug: string;
+  name: string;
+  markets: string;
+  description: string;
+  services: string[];
+  image: string;
+  highlights: string[];
+}
+
+export interface IndustryGroup {
+  id: string;
+  label: string;
+  summary: string;
+  slugs: string[];
 }

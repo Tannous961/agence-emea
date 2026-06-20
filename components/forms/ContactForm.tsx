@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useActionState, useState, useCallback } from 'react';
 import { submitContact, type ContactFormState } from '@/app/actions/contact';
@@ -55,13 +55,13 @@ export function ContactForm() {
   const inputCls = (field: string) => cn(
     'w-full bg-transparent border-b py-3 outline-none transition-colors duration-200',
     'font-body font-light text-[var(--color-cream)] text-[1rem]',
-    'placeholder:text-[var(--color-cream)]/35',
+    'placeholder:text-ink-meta',
     errors[field] && touched[field]
       ? 'border-red-400/70'
       : 'border-black/20 focus:border-[#0000FF]',
   );
 
-  const labelCls = 'block font-body font-light uppercase text-[var(--color-cream)]/60 mb-2';
+  const labelCls = 'block font-body font-light uppercase text-ink-body mb-2';
   const labelStyle = { fontSize: '0.72rem', letterSpacing: '0.28em' };
   const errorCls = 'mt-1.5 font-body font-light text-red-400/80';
   const errorStyle = { fontSize: '0.8rem' };
@@ -79,20 +79,23 @@ export function ContactForm() {
           style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', letterSpacing: '-0.02em', lineHeight: 0.95 }}>
           Message Received.
         </h3>
-        <p className="font-body font-light text-[var(--color-cream)]/50 leading-relaxed max-w-md"
+        <p className="font-body font-light text-ink-body leading-relaxed max-w-md"
           style={{ fontSize: '1rem' }}>
-          One of our regional team members will respond within <span className="text-[var(--color-cream)]/75">one business day</span>. We will reach out from the office closest to you.
+          One of our regional team members will respond within <span className="text-ink">one business day</span>. We will reach out from the office closest to you.
         </p>
-        <p className="mt-6 font-body font-light text-[var(--color-cream)]/25 uppercase"
+        <p className="mt-6 font-body font-light text-ink-meta uppercase"
           style={{ fontSize: '0.7rem', letterSpacing: '0.28em' }}>
-          Dubai · Riyadh · Cairo · Nairobi · Casablanca
+          Beirut · Lagos · Dubai · Riyadh
         </p>
       </div>
     );
   }
 
   return (
-    <form action={action} noValidate aria-label="Contact form">
+    <form action={action} noValidate aria-label="Contact form" className="relative">
+      {/* Honeypot — bots only */}
+      <input type="text" name="website" hidden tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
         {/* Name */}
@@ -157,12 +160,12 @@ export function ContactForm() {
               className={cn(
                 inputCls('budget'),
                 'bg-[#F5F5F5] appearance-none pr-8',
-                'text-[var(--color-cream)]/70',
+                'text-ink-body',
               )}
               defaultValue=""
             >
-              <option value="" disabled className="text-[#080808] bg-[#E8E8E8]">Select budget</option>
-              {budgets.map((b) => <option key={b} value={b} className="bg-[#E8E8E8] text-white">{b}</option>)}
+              <option value="" disabled className="text-ink-body bg-[#F5F5F5]">Select budget</option>
+              {budgets.map((b) => <option key={b} value={b} className="bg-[#F5F5F5] text-ink-body">{b}</option>)}
             </select>
             {/* Dropdown chevron */}
             <span className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2" aria-hidden="true">
@@ -233,7 +236,7 @@ export function ContactForm() {
             </>
           )}
         </button>
-        <p className="mt-3 font-body font-light text-[var(--color-cream)]/25" style={{ fontSize: '0.78rem' }}>
+        <p className="mt-3 font-body font-light text-ink-meta" style={{ fontSize: '0.78rem' }}>
           We respond within one business day.
         </p>
       </div>

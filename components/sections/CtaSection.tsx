@@ -1,10 +1,10 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import Image from 'next/image';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
 export function CtaSection() {
   return (
-    <section className="relative overflow-hidden" style={{ height: '90vh' }} aria-label="Final CTA">
+    <section className="relative overflow-hidden min-h-[70vh] md:min-h-[90vh]" aria-label="Final CTA">
 
       {/* Full-bleed background image */}
       <div className="absolute inset-0">
@@ -26,7 +26,7 @@ export function CtaSection() {
 
         <ScrollReveal delay={0}>
           <span
-            className="block font-body font-light uppercase text-[var(--color-cream)]/40 mb-8"
+            className="block font-body font-light uppercase text-ink-meta mb-8"
             style={{ fontSize: '0.74rem', letterSpacing: '0.38em' }}
           >
             Ready to Begin
@@ -43,12 +43,7 @@ export function CtaSection() {
             }}
           >
             Let&apos;s Build<br />
-            <span
-              style={{
-                WebkitTextStroke: '1px rgba(17,17,17,0.45)',
-                color: 'rgba(0, 0, 255, 1)',
-              }}
-            >
+            <span className="text-accent">
               Something
             </span><br />
             Exceptional.
@@ -58,12 +53,11 @@ export function CtaSection() {
         <ScrollReveal delay={0.2}>
           <Link
             href="/contact"
-            className="mt-14 inline-flex items-center gap-4 font-body font-light uppercase text-[var(--color-cream)]/60 hover:text-[var(--color-cream)] transition-colors duration-500 group"
-            style={{ fontSize: '0.82rem', letterSpacing: '0.32em' }}
+            className="mt-14 inline-flex items-center justify-center gap-3 min-h-[52px] px-10 py-4 font-body font-light uppercase text-white bg-[#0000FF] border border-[#0000FF] hover:bg-[#111] hover:border-[#111] focus-visible:ring-2 focus-visible:ring-[#0000FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F5F5F5] transition-all duration-300 outline-none text-eyebrow"
+            style={{ letterSpacing: '0.28em' }}
           >
-            <span className="w-8 h-px bg-[#0000FF] group-hover:w-14 transition-all duration-500" />
             Start a Conversation
-            <span className="w-8 h-px bg-[#0000FF] group-hover:w-14 transition-all duration-500" />
+            <span className="w-5 h-px bg-current" aria-hidden="true" />
           </Link>
         </ScrollReveal>
       </div>

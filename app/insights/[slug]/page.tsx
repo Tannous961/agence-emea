@@ -1,9 +1,10 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
 import { articles, getArticleBySlug } from '@/lib/data/insights';
+import { BRAND } from '@/lib/constants/brand';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { formatDate } from '@/lib/utils';
 import { CtaSection } from '@/components/sections/CtaSection';
 
@@ -18,10 +19,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = getArticleBySlug(slug);
   if (!article) return {};
   return {
-    title: `${article.title} — Agence EMEA Insights`,
+    title: `${article.title}`,
     description: article.excerpt,
     openGraph: { type: 'article', images: [{ url: article.image }] },
-    alternates: { canonical: `https://agence-emea.com/insights/${slug}` },
+    alternates: { canonical: `${BRAND.url}/insights/${slug}` },
   };
 }
 
@@ -56,14 +57,14 @@ export default async function ArticlePage({ params }: Props) {
       <section className="bg-[#F5F5F5] pt-44 pb-16 border-b border-black/[0.05]">
         <div className="container-site max-w-4xl">
           <ScrollReveal>
-            <Link href="/insights"
-              className="inline-flex items-center gap-3 font-body font-light uppercase text-[var(--color-cream)]/30 hover:text-[#0000FF] mb-10 transition-colors duration-300"
-              style={{ fontSize: '0.72rem', letterSpacing: '0.3em' }}>
-              <span className="w-4 h-px bg-current" /> All Insights
-            </Link>
+            <Breadcrumbs items={[
+              { label: 'Home', href: '/' },
+              { label: 'Insights', href: '/insights' },
+              { label: article.title },
+            ]} />
           </ScrollReveal>
           <ScrollReveal delay={0.05}>
-            <span className="inline-block font-body font-light uppercase text-[#0000FF]/70 mb-6"
+            <span className="inline-block font-body font-light uppercase text-blue-link mb-6"
               style={{ fontSize: '0.72rem', letterSpacing: '0.3em' }}>
               {article.category}
             </span>
@@ -75,7 +76,7 @@ export default async function ArticlePage({ params }: Props) {
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
-            <div className="mt-7 flex flex-wrap items-center gap-4 font-body font-light text-[var(--color-cream)]/25 uppercase"
+            <div className="mt-7 flex flex-wrap items-center gap-4 font-body font-light text-ink-meta uppercase"
               style={{ fontSize: '0.7rem', letterSpacing: '0.22em' }}>
               <span>{article.author.name}</span>
               <span className="w-3 h-px bg-current" />
@@ -112,7 +113,7 @@ export default async function ArticlePage({ params }: Props) {
         <div className="container-site max-w-3xl">
           <ScrollReveal>
             {/* Pull quote */}
-            <p className="font-body font-light italic text-[var(--color-cream)]/55 border-l border-[#0000FF]/60 pl-6 mb-12 leading-relaxed"
+            <p className="font-body font-light italic text-ink-body border-l border-[#0000FF]/60 pl-6 mb-12 leading-relaxed"
               style={{ fontSize: 'clamp(1rem, 1.8vw, 1.25rem)' }}>
               {article.excerpt}
             </p>
@@ -131,7 +132,7 @@ export default async function ArticlePage({ params }: Props) {
                 }
                 const cleaned = para.replace(/\*\*(.*?)\*\*/g, '$1');
                 return (
-                  <p key={i} className="font-body font-light text-[var(--color-cream)]/50 leading-relaxed"
+                  <p key={i} className="font-body font-light text-ink-body leading-relaxed"
                     style={{ fontSize: '1.06rem' }}>
                     {cleaned}
                   </p>
@@ -149,12 +150,12 @@ export default async function ArticlePage({ params }: Props) {
                 </span>
               </div>
               <div>
-                <p className="font-body font-light text-[var(--color-cream)]/80" style={{ fontSize: '1rem' }}>
+                <p className="font-body font-light text-ink" style={{ fontSize: '1rem' }}>
                   {article.author.name}
                 </p>
-                <p className="font-body font-light text-[var(--color-cream)]/30 mt-0.5"
+                <p className="font-body font-light text-ink-meta mt-0.5"
                   style={{ fontSize: '0.78rem', letterSpacing: '0.1em' }}>
-                  {article.author.role}, Agence EMEA
+                  {article.author.role}, {BRAND.name}
                 </p>
               </div>
             </div>

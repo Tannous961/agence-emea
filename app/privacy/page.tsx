@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { BRAND } from '@/lib/constants/brand';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'Privacy Policy for Agence EMEA — how we collect, use, and protect your information.',
-  alternates: { canonical: 'https://agence-emea.com/privacy' },
+  description: `Privacy Policy for ${BRAND.name} — how we collect, use, and protect your information.`,
+  alternates: { canonical: `${BRAND.url}/privacy` },
 };
 
 export default function PrivacyPage() {
@@ -15,12 +16,12 @@ export default function PrivacyPage() {
           <h1 className="font-display text-display-md text-[var(--color-cream)] uppercase mb-12">Privacy Policy</h1>
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
-          <div className="font-body text-[var(--color-cream)]/60 text-base leading-relaxed space-y-8">
+          <div className="font-body text-ink-body text-base leading-relaxed space-y-8">
             <p>Last updated: January 2025</p>
 
             <div>
               <h2 className="font-display text-xl text-[var(--color-cream)] uppercase mb-3">1. Who We Are</h2>
-              <p>Agence EMEA FZ-LLC is a digital agency registered in Dubai Design District, United Arab Emirates. References to &ldquo;we&rdquo;, &ldquo;us&rdquo;, and &ldquo;our&rdquo; refer to Agence EMEA.</p>
+              <p>{BRAND.legalName} is a digital agency registered in Dubai Design District, United Arab Emirates. References to &ldquo;we&rdquo;, &ldquo;us&rdquo;, and &ldquo;our&rdquo; refer to {BRAND.name}.</p>
             </div>
 
             <div>
@@ -35,7 +36,7 @@ export default function PrivacyPage() {
 
             <div>
               <h2 className="font-display text-xl text-[var(--color-cream)] uppercase mb-3">4. Data Retention</h2>
-              <p>Enquiry data is retained for up to 24 months or until you request deletion. You may request deletion of your data at any time by emailing <a href="mailto:privacy@agence-emea.com" className="text-[#0000FF] hover:text-[#0000FF]/70 transition-colors duration-200">privacy@agence-emea.com</a>.</p>
+              <p>Enquiry data is retained for up to 24 months or until you request deletion. You may request deletion of your data at any time by emailing <a href="mailto:privacy@agence-emea.com" className="text-[#0000FF] hover:text-blue-link transition-colors duration-200">privacy@agence-emea.com</a>.</p>
             </div>
 
             <div>
@@ -45,7 +46,7 @@ export default function PrivacyPage() {
 
             <div>
               <h2 className="font-display text-xl text-[var(--color-cream)] uppercase mb-3">6. Contact</h2>
-              <p>For any privacy-related questions: <a href="mailto:privacy@agence-emea.com" className="text-[#0000FF] hover:text-[#0000FF]/70 transition-colors duration-200">privacy@agence-emea.com</a></p>
+              <p>For any privacy-related questions: <a href="mailto:privacy@agence-emea.com" className="text-[#0000FF] hover:text-blue-link transition-colors duration-200">privacy@agence-emea.com</a></p>
             </div>
           </div>
         </ScrollReveal>

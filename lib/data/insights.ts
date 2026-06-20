@@ -1,12 +1,12 @@
 import type { Article } from '@/lib/types';
+import { insightContent } from '@/lib/data/insights-content';
 
-export const articles: Article[] = [
+const articlesBase: Omit<Article, 'content'>[] = [
   {
     slug: 'operational-efficiency-digital-playbook-mea',
     title: 'Operational Efficiency as Competitive Advantage: The Digital Playbook for MEA Enterprises',
     excerpt:
       "In MEA's fastest-growing sectors, operational efficiency isn't a finance KPI — it's the most underused source of competitive advantage. How leading organisations are reclaiming it through UX design, cloud infrastructure, and intelligent automation.",
-    content: '',
     author: { name: 'Layla Al-Rashid', role: 'Head of Strategy' },
     publishedAt: '2026-01-20',
     readTime: 8,
@@ -19,7 +19,6 @@ export const articles: Article[] = [
     title: 'Why UX Design Is Your Most Undervalued Operational Asset',
     excerpt:
       'Every click your team and customers waste on a confusing interface is a direct operational cost. A research-backed look at how intentional UX investment drives measurable efficiency gains — and why MEA enterprises can no longer afford to ignore it.',
-    content: '',
     author: { name: 'Sara Khalil', role: 'Creative Director' },
     publishedAt: '2026-01-08',
     readTime: 6,
@@ -32,7 +31,6 @@ export const articles: Article[] = [
     title: 'The Future of Digital Marketing in the MENA Region',
     excerpt:
       'Programmatic, AI-driven personalisation, and the Arabic-first content revolution are reshaping how brands reach 500 million consumers across the Middle East and North Africa.',
-    content: '',
     author: { name: 'Layla Al-Rashid', role: 'Head of Strategy' },
     publishedAt: '2025-11-15',
     readTime: 7,
@@ -45,7 +43,6 @@ export const articles: Article[] = [
     title: 'How AI Is Reshaping Business Across Africa',
     excerpt:
       'From Lagos to Nairobi, a new generation of founders is deploying large language models not as novelties, but as core infrastructure for growth.',
-    content: '',
     author: { name: 'David Mwangi', role: 'Head of AI & Automation' },
     publishedAt: '2025-10-28',
     readTime: 9,
@@ -58,7 +55,6 @@ export const articles: Article[] = [
     title: 'Building for the Arabic Web: Design Considerations You Cannot Ignore',
     excerpt:
       'RTL layouts, Arabic type rendering, cultural colour associations, and why your Western design system will fail without intentional localisation.',
-    content: '',
     author: { name: 'Sara Khalil', role: 'Creative Director' },
     publishedAt: '2025-10-05',
     readTime: 6,
@@ -71,7 +67,6 @@ export const articles: Article[] = [
     title: 'The Rise of Mobile Commerce in the Middle East',
     excerpt:
       "With smartphone penetration above 85% in GCC markets and average daily screen time among the world's highest, mobile-first is no longer optional.",
-    content: '',
     author: { name: 'Karim Hassan', role: 'Head of Mobile'},
     publishedAt: '2025-09-18',
     readTime: 5,
@@ -84,7 +79,6 @@ export const articles: Article[] = [
     title: 'Why Your Brand Needs a Premium Digital Presence in 2025',
     excerpt:
       "In MEA's most competitive verticals — real estate, luxury retail, and financial services — digital mediocrity is commercial suicide.",
-    content: '',
     author: { name: 'Layla Al-Rashid', role: 'Head of Strategy' },
     publishedAt: '2025-09-02',
     readTime: 4,
@@ -97,7 +91,6 @@ export const articles: Article[] = [
     title: 'From Dubai to Nairobi: Scaling Digital Products Across MEA',
     excerpt:
       'The MEA region is not one market — it is 54 countries, six lingua francas, and wildly different infrastructure realities. Here is how to build for all of them.',
-    content: '',
     author: { name: 'David Mwangi', role: 'Head of AI & Automation' },
     publishedAt: '2025-08-14',
     readTime: 8,
@@ -106,6 +99,11 @@ export const articles: Article[] = [
     tags: ['MEA', 'Scale', 'Product', 'Strategy'],
   },
 ];
+
+export const articles: Article[] = articlesBase.map((article) => ({
+  ...article,
+  content: insightContent[article.slug] ?? '',
+}));
 
 export function getArticleBySlug(slug: string): Article | undefined {
   return articles.find((a) => a.slug === slug);

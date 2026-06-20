@@ -1,4 +1,4 @@
-﻿import Image from 'next/image';
+import Image from 'next/image';
 import { offices } from '@/lib/data/clients';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
@@ -13,7 +13,7 @@ export function RegionalSection() {
             <span className="w-4 h-px bg-[#0000FF]" />
             <h2
               id="regional-heading"
-              className="font-body font-light uppercase text-[var(--color-cream)]/40"
+              className="font-body font-light uppercase text-ink-meta"
               style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}
             >
               Regional Presence
@@ -35,12 +35,7 @@ export function RegionalSection() {
                 }}
               >
                 Locally Rooted.<br />
-                <span
-                  style={{
-                    WebkitTextStroke: '1px rgba(17,17,17,0.4)',
-                    color: 'rgba(0, 0, 255, 1)',
-                  }}
-                >
+                <span className="text-accent">
                   Globally Capable.
                 </span>
               </p>
@@ -51,27 +46,27 @@ export function RegionalSection() {
                 <ScrollReveal key={o.city} delay={0.06 + i * 0.07}>
                   <div className="border-t border-black/[0.06] py-6 flex items-start gap-6">
                     <span
-                      className="shrink-0 font-body font-light text-[#0000FF]/60 tabular-nums pt-px"
+                      className="shrink-0 font-body font-light text-blue-link tabular-nums pt-px"
                       style={{ fontSize: '0.72rem', letterSpacing: '0.15em' }}
                     >
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <div className="flex-1">
                       <span
-                        className="block font-body font-light text-[var(--color-cream)]/75"
+                        className="block font-body font-light text-ink"
                         style={{ fontSize: '1rem' }}
                       >
                         {o.city}, {o.country}
                       </span>
                       <span
-                        className="block font-body font-light text-[var(--color-cream)]/30 mt-0.5"
+                        className="block font-body font-light text-ink-meta mt-0.5"
                         style={{ fontSize: '0.82rem', letterSpacing: '0.08em' }}
                       >
                         {o.markets.slice(0, 3).join(' · ')}
                       </span>
                     </div>
                     <span
-                      className="shrink-0 font-body font-light text-[var(--color-cream)]/20 pt-px"
+                      className="shrink-0 font-body font-light text-ink-meta pt-px"
                       style={{ fontSize: '0.78rem', letterSpacing: '0.15em' }}
                     >
                       {o.timezone}
@@ -102,7 +97,7 @@ export function RegionalSection() {
               />
               <div className="absolute bottom-7 left-7 right-7">
                 <span
-                  className="block font-body font-light uppercase text-[var(--color-cream)]/40 mb-1"
+                  className="block font-body font-light uppercase text-ink-meta mb-1"
                   style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}
                 >
                   Coverage

@@ -1,5 +1,6 @@
-﻿import Image from 'next/image';
+import Image from 'next/image';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { BRAND } from '@/lib/constants/brand';
 
 const pillars = [
   { n: '01', title: 'Regional Depth',          body: 'Not a global agency parachuting in. We are embedded in MEA — the markets, the languages, the culture.' },
@@ -20,10 +21,10 @@ export function WhyUsSection() {
             <span className="w-4 h-px bg-[#0000FF]" />
             <h2
               id="why-heading"
-              className="font-body font-light uppercase text-[var(--color-cream)]/40"
+              className="font-body font-light uppercase text-ink-meta"
               style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}
             >
-              Why Agence EMEA
+              Why {BRAND.name}
             </h2>
           </div>
         </ScrollReveal>
@@ -36,7 +37,7 @@ export function WhyUsSection() {
             <div className="relative overflow-hidden" style={{ height: 'clamp(320px, 55vw, 580px)' }}>
               <Image
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1000&q=85"
-                alt="Agence EMEA studio"
+                alt={`${BRAND.name} studio`}
                 fill
                 className="object-cover object-center grayscale"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -52,7 +53,7 @@ export function WhyUsSection() {
                 <div className="border-t border-black/[0.07] py-9">
                   <div className="flex items-start gap-6">
                     <span
-                      className="shrink-0 font-body font-light text-[#0000FF]/70 pt-1 tabular-nums"
+                      className="shrink-0 font-body font-light text-blue-link pt-1 tabular-nums"
                       style={{ fontSize: '0.72rem', letterSpacing: '0.15em' }}
                     >
                       {p.n}
@@ -65,7 +66,7 @@ export function WhyUsSection() {
                         {p.title}
                       </h3>
                       <p
-                        className="font-body font-light text-[var(--color-cream)]/40 leading-relaxed"
+                        className="font-body font-light text-ink-meta leading-relaxed"
                         style={{ fontSize: '1rem' }}
                       >
                         {p.body}

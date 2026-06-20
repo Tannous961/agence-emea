@@ -13,7 +13,7 @@ const HEADLINE_SEGMENTS = [
 ] as const;
 
 const headlineStyle = {
-  fontSize: '120px',
+  fontSize: 'clamp(2.5rem, 12vw, 7.5rem)',
   letterSpacing: '-0.025em',
 } as const;
 
@@ -22,18 +22,9 @@ type MotionPrefs = {
   isDesktop: boolean;
 };
 
-/** SSR + first client paint — empty first line, no cursor. */
+/** SSR + first client paint — full headline for LCP, no animation delay. */
 function HeadlinePlaceholder() {
-  return (
-    <h1 className="mb-12" aria-label="Premium Digital Agency">
-      <div className="leading-[0.92]">
-        <span
-          className="block font-body font-bold uppercase"
-          style={{ ...headlineStyle, color: HEADLINE_SEGMENTS[0].color }}
-        />
-      </div>
-    </h1>
-  );
+  return <StaticHeadline />;
 }
 
 function StaticHeadline() {
@@ -103,10 +94,14 @@ export function Hero() {
   const handleHeadlineComplete = useCallback(() => setHeadlineDone(true), []);
 
   useEffect(() => {
-    if (motionPrefs?.reducedMotion) {
+    if (!motionPrefs) return;
+    if (motionPrefs.reducedMotion || !motionPrefs.isDesktop) {
       setHeadlineDone(true);
     }
-  }, [motionPrefs?.reducedMotion]);
+  }, [motionPrefs]);
+
+  const useTypewriter =
+    motionPrefs !== null && motionPrefs.isDesktop && !motionPrefs.reducedMotion;
 
   return (
     <section
@@ -120,7 +115,6 @@ export function Hero() {
           alt=""
           fill
           priority
-          unoptimized
           className="object-cover object-[65%_center]"
           sizes="100vw"
         />
@@ -140,9 +134,7 @@ export function Hero() {
         <div className="container-site pb-20 md:pb-28">
           {motionPrefs === null ? (
             <HeadlinePlaceholder />
-          ) : motionPrefs.reducedMotion ? (
-            <StaticHeadline />
-          ) : (
+          ) : useTypewriter ? (
             <TypewriterText
               segments={HEADLINE_SEGMENTS}
               className="mb-12"
@@ -150,30 +142,32 @@ export function Hero() {
               ariaLabel="Premium Digital Agency"
               onComplete={handleHeadlineComplete}
             />
+          ) : (
+            <StaticHeadline />
           )}
 
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-t border-black/[0.08] pt-7">
             <p
-              className="font-body font-light text-[var(--color-cream)]/45 max-w-xs leading-relaxed"
+              className="font-body font-light text-ink-body max-w-xs leading-relaxed"
               style={{ fontSize: '1rem' }}
             >
               Building brands &amp; digital experiences<br />
               for the Middle East and Africa.
             </p>
 
-            <div className="flex items-center gap-8">
+            <div className="flex flex-col xs:flex-row items-start xs:items-center gap-4 sm:gap-8">
               <Link
                 href="/work"
-                className="group flex items-center gap-3 font-body font-light uppercase text-[var(--color-cream)]/55 hover:text-[var(--color-cream)] focus-visible:text-[#0000FF] transition-colors duration-400 outline-none"
-                style={{ fontSize: '0.78rem', letterSpacing: '0.3em' }}
+                className="group flex items-center gap-3 font-body font-light uppercase text-ink-body hover:text-[var(--color-cream)] focus-visible:text-blue-link transition-colors duration-400 outline-none min-h-[44px] text-eyebrow"
+                style={{ letterSpacing: '0.3em' }}
               >
                 Explore Work
                 <span className="w-7 h-px bg-current transition-all duration-500 group-hover:w-12" aria-hidden="true" />
               </Link>
               <Link
                 href="/contact"
-                className="font-body font-light uppercase text-[#0000FF] hover:text-[var(--color-cream)] focus-visible:text-white transition-colors duration-400 outline-none"
-                style={{ fontSize: '0.78rem', letterSpacing: '0.3em' }}
+                className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 font-body font-light uppercase text-white bg-[#0000FF] border border-[#0000FF] hover:bg-[#111] hover:border-[#111] focus-visible:ring-2 focus-visible:ring-[#0000FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F5F5F5] transition-all duration-300 outline-none text-eyebrow"
+                style={{ letterSpacing: '0.3em' }}
               >
                 Start a Project
               </Link>

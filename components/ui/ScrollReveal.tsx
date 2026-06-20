@@ -56,7 +56,7 @@ export function ScrollReveal({
       ref={ref}
       initial={initial}
       animate={animate}
-      transition={{ duration: 1.1, ease: [0.25, 0.46, 0.45, 0.94], delay }}
+      transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94], delay }}
       className={cn(className)}
     >
       {children}

@@ -30,7 +30,7 @@ const variants = {
     'focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F5F5F5]',
   ].join(' '),
   ghost: [
-    'bg-transparent text-[var(--color-cream)]/60 border border-transparent',
+    'bg-transparent text-ink-body border border-transparent',
     'hover:text-[#0000FF]',
     'active:scale-[0.97]',
     'focus-visible:ring-2 focus-visible:ring-[#0000FF]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F5F5F5]',

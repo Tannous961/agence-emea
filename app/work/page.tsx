@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { caseStudies } from '@/lib/data/work';
@@ -21,7 +21,7 @@ export default function WorkPage() {
           <ScrollReveal>
             <div className="flex items-center gap-4 mb-8">
               <span className="w-4 h-px bg-[#0000FF]" />
-              <span className="font-body font-light uppercase text-[var(--color-cream)]/40"
+              <span className="font-body font-light uppercase text-ink-meta"
                 style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}>
                 Selected Projects
               </span>
@@ -31,13 +31,13 @@ export default function WorkPage() {
             <h1 className="font-display font-semibold uppercase text-[var(--color-cream)]"
               style={{ fontSize: 'clamp(2.8rem, 7vw, 7rem)', lineHeight: 0.92, letterSpacing: '-0.025em' }}>
               Work That<br />
-              <span style={{ WebkitTextStroke: '1px rgba(17,17,17,0.4)', color: 'transparent' }}>
+              <span className="text-accent">
                 Moves the Needle.
               </span>
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
-            <p className="mt-8 font-body font-light text-[var(--color-cream)]/45 max-w-lg leading-relaxed"
+            <p className="mt-8 font-body font-light text-ink-body max-w-lg leading-relaxed"
               style={{ fontSize: '1.06rem' }}>
               Every project here has a business result attached. Craft is the baseline — outcomes are the measure.
             </p>
@@ -69,7 +69,7 @@ export default function WorkPage() {
                 <div className="flex flex-wrap gap-2 mb-4">
                   {caseStudies[0].tags.slice(0, 3).map((t) => (
                     <span key={t}
-                      className="font-body font-light text-[var(--color-cream)]/40 border border-black/[0.15] px-3 py-1"
+                      className="font-body font-light text-ink-meta border border-black/[0.15] px-3 py-1"
                       style={{ fontSize: '0.7rem', letterSpacing: '0.2em' }}>
                       {t}
                     </span>
@@ -79,7 +79,7 @@ export default function WorkPage() {
                   style={{ fontSize: 'clamp(1.8rem, 4vw, 3.5rem)', lineHeight: 0.92, letterSpacing: '-0.02em' }}>
                   {caseStudies[0].title}
                 </h2>
-                <p className="font-body font-light text-[var(--color-cream)]/45 mt-2"
+                <p className="font-body font-light text-ink-body mt-2"
                   style={{ fontSize: '0.92rem' }}>
                   {caseStudies[0].client} · {caseStudies[0].year}
                 </p>
@@ -90,7 +90,7 @@ export default function WorkPage() {
                         style={{ fontSize: 'clamp(1.6rem, 3vw, 2.5rem)', letterSpacing: '-0.03em' }}>
                         {m.value}
                       </span>
-                      <span className="block font-body font-light text-[var(--color-cream)]/35 uppercase mt-0.5"
+                      <span className="block font-body font-light text-ink-meta uppercase mt-0.5"
                         style={{ fontSize: '0.66rem', letterSpacing: '0.2em' }}>
                         {m.label}
                       </span>
@@ -124,7 +124,7 @@ export default function WorkPage() {
                       style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.9rem)', lineHeight: 0.95, letterSpacing: '-0.015em' }}>
                       {study.title}
                     </h2>
-                    <p className="font-body font-light text-[var(--color-cream)]/40 mt-1.5"
+                    <p className="font-body font-light text-ink-meta mt-1.5"
                       style={{ fontSize: '0.86rem' }}>
                       {study.client} · {study.year}
                     </p>
@@ -135,7 +135,7 @@ export default function WorkPage() {
                             style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.8rem)', letterSpacing: '-0.03em' }}>
                             {m.value}
                           </span>
-                          <span className="block font-body font-light text-[var(--color-cream)]/30 uppercase mt-0.5"
+                          <span className="block font-body font-light text-ink-meta uppercase mt-0.5"
                             style={{ fontSize: '0.64rem', letterSpacing: '0.18em' }}>
                             {m.label}
                           </span>

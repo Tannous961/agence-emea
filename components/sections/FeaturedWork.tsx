@@ -1,12 +1,13 @@
-﻿'use client';
+'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import type { CaseStudy } from '@/lib/types';
 import { caseStudies } from '@/lib/data/work';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { SectionViewAllLink } from '@/components/ui/SectionViewAllLink';
 
 export function FeaturedWork() {
   const [hero, second, third] = caseStudies;
@@ -20,35 +21,27 @@ export function FeaturedWork() {
             <div className="flex items-center gap-4">
               <span className="w-4 h-px bg-[#0000FF]" />
               <span
-                className="font-body font-light uppercase text-[var(--color-cream)]/40"
+                className="font-body font-light uppercase text-ink-meta"
                 style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}
               >
                 Selected Work
               </span>
             </div>
-            <Link
-              href="/work"
-              className="hidden md:flex items-center gap-3 font-body font-light uppercase text-[var(--color-cream)]/35 hover:text-[var(--color-cream)] transition-colors duration-400"
-              style={{ fontSize: '0.72rem', letterSpacing: '0.3em' }}
-            >
-              View All
-              <span className="w-6 h-px bg-current" />
-            </Link>
+            <SectionViewAllLink href="/work" label="View All" />
           </div>
         </ScrollReveal>
 
         {/* Hero tile — full width, cinematic 16:7 */}
         <ScrollReveal className="mb-2">
-          <Tile study={hero} height="75vh" index={1} />
+          <Tile study={hero} height="clamp(280px, 55vh, 900px)" index={1} />
         </ScrollReveal>
 
-        {/* Two secondary tiles */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-2">
           <ScrollReveal className="md:col-span-3" delay={0.1}>
-            <Tile study={second} height="55vh" index={2} />
+            <Tile study={second} height="clamp(240px, 45vh, 700px)" index={2} />
           </ScrollReveal>
           <ScrollReveal className="md:col-span-2" delay={0.2}>
-            <Tile study={third} height="55vh" index={3} />
+            <Tile study={third} height="clamp(240px, 45vh, 700px)" index={3} />
           </ScrollReveal>
         </div>
       </div>
@@ -58,7 +51,18 @@ export function FeaturedWork() {
 
 function Tile({ study, height, index }: { study: CaseStudy; height: string; index: number }) {
   const [hov, setHov] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
   const pfx = useReducedMotion();
+
+  useEffect(() => {
+    const mq = window.matchMedia('(hover: none), (pointer: coarse)');
+    setIsTouch(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setIsTouch(e.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  const showMetrics = hov || isTouch || pfx;
 
   return (
     <Link
@@ -118,7 +122,7 @@ function Tile({ study, height, index }: { study: CaseStudy; height: string; inde
 
         {/* Category */}
         <span
-          className="block font-body font-light uppercase text-[var(--color-cream)]/40 mb-3"
+          className="block font-body font-light uppercase text-ink-meta mb-3"
           style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}
         >
           {study.category}
@@ -136,7 +140,7 @@ function Tile({ study, height, index }: { study: CaseStudy; height: string; inde
         </h3>
 
         <p
-          className="font-body font-light text-[var(--color-cream)]/40 mt-2"
+          className="font-body font-light text-ink-meta mt-2"
           style={{ fontSize: '0.88rem', letterSpacing: '0.08em' }}
         >
           {study.client} <span className="text-white/20">·</span> {study.year}
@@ -145,7 +149,7 @@ function Tile({ study, height, index }: { study: CaseStudy; height: string; inde
         {/* Metrics — fade in on hover */}
         <motion.div
           className="flex gap-8 mt-6 overflow-hidden"
-          animate={!pfx ? { height: hov ? 'auto' : 0, opacity: hov ? 1 : 0 } : {}}
+          animate={!pfx ? { height: showMetrics ? 'auto' : 0, opacity: showMetrics ? 1 : 0 } : {}}
           initial={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.35, ease: 'easeOut' }}
         >
@@ -158,7 +162,7 @@ function Tile({ study, height, index }: { study: CaseStudy; height: string; inde
                 {m.value}
               </span>
               <span
-                className="block font-body font-light uppercase text-[var(--color-cream)]/35 mt-1"
+                className="block font-body font-light uppercase text-ink-meta mt-1"
                 style={{ fontSize: '0.72rem', letterSpacing: '0.25em' }}
               >
                 {m.label}

@@ -1,15 +1,16 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { team } from '@/lib/data/team';
 import { offices } from '@/lib/data/clients';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { CtaSection } from '@/components/sections/CtaSection';
+import { BRAND } from '@/lib/constants/brand';
 
 export const metadata: Metadata = {
   title: 'About — Who We Are & How We Work',
   description:
-    'Agence EMEA is a premium digital agency headquartered in Dubai, with offices across the Middle East and Africa. Meet our team and learn our approach.',
-  alternates: { canonical: 'https://agence-emea.com/about' },
+    `${BRAND.name} is a premium digital agency headquartered in Dubai, with offices across the Middle East and Africa. Meet our team and learn our approach.`,
+  alternates: { canonical: `${BRAND.url}/about` },
 };
 
 const values = [
@@ -44,7 +45,7 @@ export default function AboutPage() {
           <ScrollReveal>
             <div className="flex items-center gap-4 mb-8">
               <span className="w-4 h-px bg-[#0000FF]" />
-              <span className="font-body font-light uppercase text-[var(--color-cream)]/40"
+              <span className="font-body font-light uppercase text-ink-meta"
                 style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}>
                 About Us
               </span>
@@ -54,7 +55,7 @@ export default function AboutPage() {
             <h1 className="font-display font-semibold uppercase text-[var(--color-cream)]"
               style={{ fontSize: 'clamp(2.8rem, 7vw, 7rem)', lineHeight: 0.92, letterSpacing: '-0.025em' }}>
               Built for<br />This Region.<br />
-              <span style={{ WebkitTextStroke: '1px rgba(17,17,17,0.4)', color: 'transparent' }}>
+              <span className="text-accent">
                 Obsessed.
               </span>
             </h1>
@@ -70,7 +71,7 @@ export default function AboutPage() {
               <div className="relative aspect-[4/5] overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80"
-                  alt="Agence EMEA team workspace in Dubai"
+                  alt={`${BRAND.name} team workspace in Dubai`}
                   fill
                   className="object-cover grayscale"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -84,7 +85,7 @@ export default function AboutPage() {
               <ScrollReveal delay={0.1}>
                 <div className="flex items-center gap-4 mb-6">
                   <span className="w-4 h-px bg-[#0000FF]" />
-                  <span className="font-body font-light uppercase text-[var(--color-cream)]/40"
+                  <span className="font-body font-light uppercase text-ink-meta"
                     style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}>
                     Our Story
                   </span>
@@ -95,19 +96,19 @@ export default function AboutPage() {
                 </h2>
               </ScrollReveal>
               <ScrollReveal delay={0.15}>
-                <p className="font-body font-light text-[var(--color-cream)]/55 leading-relaxed"
+                <p className="font-body font-light text-ink-body leading-relaxed"
                   style={{ fontSize: '1.06rem' }}>
-                  Agence EMEA was founded in 2014 with a simple conviction: the Middle East and Africa deserved a world-class digital agency that understood these markets as deeply as any London or New York shop understood theirs.
+                  {BRAND.name} was founded in 2014 with a simple conviction: the Middle East and Africa deserved a world-class digital agency that understood these markets as deeply as any London or New York shop understood theirs.
                 </p>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
-                <p className="font-body font-light text-[var(--color-cream)]/40 leading-relaxed"
+                <p className="font-body font-light text-ink-meta leading-relaxed"
                   style={{ fontSize: '1rem' }}>
-                  We started in Dubai with four people and a refusal to take on work we could not do brilliantly. A decade later, we have five offices across MEA, 70 full-time specialists, and a client list that includes some of the region&apos;s most recognised organisations — from sovereign wealth funds to Series A startups.
+                  We started in Dubai with four people and a refusal to take on work we could not do brilliantly. A decade later, we have four offices across MEA — Beirut, Lagos, Dubai, and Riyadh — 70 full-time specialists, and a client list that includes some of the region&apos;s most recognised organisations — from sovereign wealth funds to Series A startups.
                 </p>
               </ScrollReveal>
               <ScrollReveal delay={0.25}>
-                <p className="font-body font-light text-[var(--color-cream)]/40 leading-relaxed"
+                <p className="font-body font-light text-ink-meta leading-relaxed"
                   style={{ fontSize: '1rem' }}>
                   The mission has not changed: be the most trusted digital partner for ambitious brands across the Middle East and Africa.
                 </p>
@@ -126,7 +127,7 @@ export default function AboutPage() {
                         style={{ fontSize: 'clamp(1.8rem, 3vw, 2.8rem)', letterSpacing: '-0.04em', lineHeight: 1 }}>
                         {v}
                       </span>
-                      <span className="block font-body font-light text-[var(--color-cream)]/30 uppercase mt-1"
+                      <span className="block font-body font-light text-ink-meta uppercase mt-1"
                         style={{ fontSize: '0.72rem', letterSpacing: '0.25em' }}>
                         {l}
                       </span>
@@ -145,7 +146,7 @@ export default function AboutPage() {
           <ScrollReveal>
             <div className="flex items-center gap-4 mb-16">
               <span className="w-4 h-px bg-[#0000FF]" />
-              <span className="font-body font-light uppercase text-[var(--color-cream)]/40"
+              <span className="font-body font-light uppercase text-ink-meta"
                 style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}>
                 Values
               </span>
@@ -160,7 +161,7 @@ export default function AboutPage() {
             {values.map(({ n, v, d }, i) => (
               <ScrollReveal key={v} delay={i * 0.08}>
                 <div className="bg-[#F5F5F5] p-10 md:p-12 group hover:bg-[#EDEDED] transition-colors duration-300">
-                  <span className="block font-body font-light text-[var(--color-cream)]/15 mb-5 tabular-nums"
+                  <span className="block font-body font-light text-ink-muted mb-5 tabular-nums"
                     style={{ fontSize: '0.7rem', letterSpacing: '0.22em' }}>
                     {n}
                   </span>
@@ -168,7 +169,7 @@ export default function AboutPage() {
                     style={{ fontSize: 'clamp(1.2rem, 2vw, 1.7rem)', letterSpacing: '-0.015em' }}>
                     {v}
                   </h3>
-                  <p className="font-body font-light text-[var(--color-cream)]/40 leading-relaxed"
+                  <p className="font-body font-light text-ink-meta leading-relaxed"
                     style={{ fontSize: '1rem' }}>
                     {d}
                   </p>
@@ -185,7 +186,7 @@ export default function AboutPage() {
           <ScrollReveal>
             <div className="flex items-center gap-4 mb-16">
               <span className="w-4 h-px bg-[#0000FF]" />
-              <span className="font-body font-light uppercase text-[var(--color-cream)]/40"
+              <span className="font-body font-light uppercase text-ink-meta"
                 style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}>
                 Leadership
               </span>
@@ -213,11 +214,11 @@ export default function AboutPage() {
                     style={{ fontSize: 'clamp(1rem, 1.5vw, 1.3rem)', letterSpacing: '-0.01em' }}>
                     {member.name}
                   </h3>
-                  <p className="font-body font-light text-[#0000FF]/70 mt-0.5"
+                  <p className="font-body font-light text-blue-link mt-0.5"
                     style={{ fontSize: '0.86rem', letterSpacing: '0.12em' }}>
                     {member.role}
                   </p>
-                  <p className="font-body font-light text-[var(--color-cream)]/35 mt-3 leading-relaxed"
+                  <p className="font-body font-light text-ink-meta mt-3 leading-relaxed"
                     style={{ fontSize: '0.94rem' }}>
                     {member.bio}
                   </p>
@@ -234,7 +235,7 @@ export default function AboutPage() {
           <ScrollReveal>
             <div className="flex items-center gap-4 mb-16">
               <span className="w-4 h-px bg-[#0000FF]" />
-              <span className="font-body font-light uppercase text-[var(--color-cream)]/40"
+              <span className="font-body font-light uppercase text-ink-meta"
                 style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}>
                 Presence
               </span>
@@ -242,29 +243,29 @@ export default function AboutPage() {
             <h2 id="offices-heading"
               className="font-display font-semibold uppercase text-[var(--color-cream)] mb-16"
               style={{ fontSize: 'clamp(2rem, 4vw, 3.8rem)', letterSpacing: '-0.02em', lineHeight: 0.92 }}>
-              Five Cities.<br />
-              <span style={{ WebkitTextStroke: '1px rgba(17,17,17,0.35)', color: 'transparent' }}>
+              Four Cities.<br />
+              <span className="text-accent">
                 One Region.
               </span>
             </h2>
           </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-black/[0.05]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/[0.05]">
             {offices.map((o, i) => (
               <ScrollReveal key={o.city} delay={i * 0.07}>
                 <div className="bg-[#F5F5F5] p-8 hover:bg-[#EDEDED] transition-colors duration-300">
-                  <span className="block font-body font-light text-[var(--color-cream)]/15 mb-4 tabular-nums"
+                  <span className="block font-body font-light text-ink-muted mb-4 tabular-nums"
                     style={{ fontSize: '0.7rem', letterSpacing: '0.2em' }}>
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <p className="font-body font-light text-[var(--color-cream)]/80"
+                  <p className="font-body font-light text-ink"
                     style={{ fontSize: '1.02rem' }}>
                     {o.city}
                   </p>
-                  <p className="font-body font-light text-[var(--color-cream)]/35 mt-0.5"
+                  <p className="font-body font-light text-ink-meta mt-0.5"
                     style={{ fontSize: '0.78rem', letterSpacing: '0.06em' }}>
                     {o.country}
                   </p>
-                  <p className="font-body font-light text-[var(--color-cream)]/20 mt-3"
+                  <p className="font-body font-light text-ink-meta mt-3"
                     style={{ fontSize: '0.7rem', letterSpacing: '0.1em' }}>
                     {o.timezone}
                   </p>

@@ -1,3 +1,5 @@
+import { BRAND } from '@/lib/constants/brand';
+
 interface JsonLdProps {
   data: Record<string, unknown>;
 }
@@ -14,9 +16,9 @@ export function JsonLd({ data }: JsonLdProps) {
 export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'Agence EMEA',
-  url: 'https://agence-emea.com',
-  logo: 'https://agence-emea.com/logo.png',
+  name: BRAND.name,
+  url: BRAND.url,
+  logo: `${BRAND.url}/logo.png`,
   sameAs: [
     'https://linkedin.com/company/agence-emea',
     'https://instagram.com/agenceemea',
@@ -43,11 +45,11 @@ export const organizationSchema = {
 export const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Agence EMEA',
-  url: 'https://agence-emea.com',
+  name: BRAND.name,
+  url: BRAND.url,
   potentialAction: {
     '@type': 'SearchAction',
-    target: 'https://agence-emea.com/insights?q={search_term_string}',
+    target: `${BRAND.url}/insights?q={search_term_string}`,
     'query-input': 'required name=search_term_string',
   },
 };

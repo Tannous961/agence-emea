@@ -1,13 +1,15 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { offices } from '@/lib/data/clients';
 import { ContactForm } from '@/components/forms/ContactForm';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { BRAND } from '@/lib/constants/brand';
 
 export const metadata: Metadata = {
   title: 'Contact — Start a Project',
   description:
-    'Get in touch with our team in Dubai, Riyadh, Cairo, Nairobi, or Casablanca. We respond within one business day.',
-  alternates: { canonical: 'https://agence-emea.com/contact' },
+    'Get in touch with our team in Beirut, Lagos, Dubai, or Riyadh. We respond within one business day.',
+  alternates: { canonical: `${BRAND.url}/contact` },
 };
 
 export default function ContactPage() {
@@ -17,9 +19,15 @@ export default function ContactPage() {
       <section className="bg-[#F5F5F5] pt-44 pb-24 border-b border-black/[0.05]">
         <div className="container-site">
           <ScrollReveal>
+            <Breadcrumbs items={[
+              { label: 'Home', href: '/' },
+              { label: 'Contact' },
+            ]} />
+          </ScrollReveal>
+          <ScrollReveal delay={0.05}>
             <div className="flex items-center gap-4 mb-8">
               <span className="w-4 h-px bg-[#0000FF]" />
-              <span className="font-body font-light uppercase text-[var(--color-cream)]/40"
+              <span className="font-body font-light uppercase text-ink-meta"
                 style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}>
                 Get in Touch
               </span>
@@ -29,13 +37,13 @@ export default function ContactPage() {
             <h1 className="font-display font-semibold uppercase text-[var(--color-cream)]"
               style={{ fontSize: 'clamp(2.8rem, 7vw, 7rem)', lineHeight: 0.92, letterSpacing: '-0.025em' }}>
               Let&apos;s Start a<br />
-              <span style={{ WebkitTextStroke: '1px rgba(17,17,17,0.4)', color: 'transparent' }}>
+              <span className="text-accent">
                 Conversation.
               </span>
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
-            <p className="mt-8 font-body font-light text-[var(--color-cream)]/45 max-w-lg leading-relaxed"
+            <p className="mt-8 font-body font-light text-ink-body max-w-lg leading-relaxed"
               style={{ fontSize: '1.06rem' }}>
               Tell us about your project. We will match you with the right team in the nearest office and respond within one business day.
             </p>
@@ -58,7 +66,7 @@ export default function ContactPage() {
             <ScrollReveal delay={0.15}>
               <div className="flex items-center gap-4 mb-8">
                 <span className="w-4 h-px bg-[#0000FF]" />
-                <span className="font-body font-light uppercase text-[var(--color-cream)]/30"
+                <span className="font-body font-light uppercase text-ink-meta"
                   style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}>
                   Our Offices
                 </span>
@@ -66,20 +74,20 @@ export default function ContactPage() {
               <div className="space-y-8">
                 {offices.map((o) => (
                   <div key={o.city} className="border-l border-black/[0.08] hover:border-[#0000FF]/50 pl-5 transition-colors duration-300">
-                    <p className="font-body font-light text-[var(--color-cream)]/80"
+                    <p className="font-body font-light text-ink"
                       style={{ fontSize: '1rem' }}>
                       {o.city}, {o.country}
                     </p>
-                    <p className="font-body font-light text-[var(--color-cream)]/35 mt-1 leading-relaxed"
+                    <p className="font-body font-light text-ink-meta mt-1 leading-relaxed"
                       style={{ fontSize: '0.86rem' }}>
                       {o.address}
                     </p>
                     <a href={`mailto:${o.email}`}
-                      className="block font-body font-light text-[#0000FF]/60 hover:text-[#0000FF] mt-1.5 transition-colors duration-300"
+                      className="block font-body font-light text-blue-link hover:text-[#0000FF] mt-1.5 transition-colors duration-300"
                       style={{ fontSize: '0.86rem' }}>
                       {o.email}
                     </a>
-                    <p className="font-body font-light text-[var(--color-cream)]/20 mt-1"
+                    <p className="font-body font-light text-ink-meta mt-1"
                       style={{ fontSize: '0.74rem', letterSpacing: '0.1em' }}>
                       {o.timezone}
                     </p>

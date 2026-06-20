@@ -73,6 +73,7 @@ export function Header() {
   }[] = [
     { label: 'Services',   href: '/services',   menu: 'services',   menuId: servicesMenuId },
     { label: 'Industries', href: '/industries', menu: 'industries', menuId: industriesMenuId },
+    { label: 'Work',       href: '/work' },
     { label: 'About',      href: '/about' },
     { label: 'Insights',   href: '/insights' },
   ];
@@ -124,7 +125,7 @@ export function Header() {
                         href={item.href}
                         className={cn(
                           'text-[15px] leading-[72px] font-body font-light uppercase tracking-[0.25em] transition-colors duration-300',
-                          isActive ? 'text-[var(--color-cream)]' : 'text-[var(--color-cream)]/50 hover:text-[var(--color-cream)]',
+                          isActive ? 'text-[var(--color-cream)]' : 'text-ink-body hover:text-[var(--color-cream)]',
                         )}
                         onMouseEnter={() => openMenu(item.menu!)}
                       >
@@ -136,7 +137,7 @@ export function Header() {
                         aria-expanded={isActive}
                         aria-controls={item.menuId}
                         aria-label={`${isActive ? 'Close' : 'Open'} ${item.label} menu`}
-                        className="ml-1 p-1 text-[var(--color-cream)]/30 hover:text-[var(--color-cream)]/60 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-[#0000FF] rounded-sm"
+                        className="ml-1 p-1 text-ink-meta hover:text-ink-body transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-[#0000FF] rounded-sm"
                         onClick={() => toggleMenu(item.menu!)}
                         onKeyDown={(e) => {
                           if (e.key === 'Enter' || e.key === ' ') {
@@ -160,7 +161,7 @@ export function Header() {
                   ) : (
                     <Link
                       href={item.href}
-                      className="text-[15px] leading-[72px] font-body font-light uppercase tracking-[0.25em] text-[var(--color-cream)]/50 hover:text-[var(--color-cream)] transition-colors duration-300"
+                      className="text-[15px] leading-[72px] font-body font-light uppercase tracking-[0.25em] text-ink-body hover:text-[var(--color-cream)] transition-colors duration-300"
                       onMouseEnter={() => setActiveMenu(null)}
                     >
                       {item.label}
@@ -179,7 +180,7 @@ export function Header() {
             })}
             <Link
               href="/contact"
-              className="ml-2 text-[13px] font-body font-light uppercase tracking-[0.2em] text-[#0000FF] hover:text-[var(--color-cream)] transition-colors duration-300 flex items-center gap-2"
+              className="ml-2 inline-flex items-center justify-center gap-2 min-h-[44px] px-5 py-2 text-[13px] font-body font-light uppercase tracking-[0.2em] text-white bg-[#0000FF] border border-[#0000FF] hover:bg-[#111] hover:border-[#111] focus-visible:ring-2 focus-visible:ring-[#0000FF] focus-visible:ring-offset-2 transition-all duration-300"
               onMouseEnter={() => setActiveMenu(null)}
             >
               Start a Project <span className="w-4 h-px bg-current inline-block" aria-hidden="true" />

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,7 +15,7 @@ export function TestimonialsSection() {
   const quoteContent = (
     <>
       <p
-        className="font-display font-light text-[var(--color-cream)]/70 italic"
+        className="font-display font-light text-ink-body italic"
         style={{ fontSize: 'clamp(1.5rem, 3vw, 2.8rem)', lineHeight: 1.3, letterSpacing: '-0.01em' }}
       >
         &ldquo;{t.quote}&rdquo;
@@ -23,11 +23,11 @@ export function TestimonialsSection() {
       <footer className="mt-10 flex items-center gap-4">
         <span className="w-6 h-px bg-[#0000FF]" />
         <div>
-          <cite className="not-italic font-body font-light text-[var(--color-cream)]/60 text-sm">
+          <cite className="not-italic font-body font-light text-ink-body text-sm">
             {t.author}
           </cite>
           <span
-            className="block font-body font-light text-[var(--color-cream)]/30 mt-0.5"
+            className="block font-body font-light text-ink-meta mt-0.5"
             style={{ fontSize: '0.84rem', letterSpacing: '0.1em' }}
           >
             {t.role}, {t.company}
@@ -47,7 +47,7 @@ export function TestimonialsSection() {
             <span className="w-4 h-px bg-[#0000FF]" />
             <h2
               id="testimonials-heading"
-              className="font-body font-light uppercase text-[var(--color-cream)]/40"
+              className="font-body font-light uppercase text-ink-meta"
               style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}
             >
               Client Perspectives
@@ -90,7 +90,7 @@ export function TestimonialsSection() {
                     className="block font-body font-light transition-colors duration-300"
                     style={{
                       fontSize: '0.86rem',
-                      color: active === i ? 'var(--color-cream)' : 'rgba(17,17,17,0.28)',
+                      color: active === i ? 'var(--color-cream)' : 'rgba(17,17,17,0.58)',
                     }}
                   >
                     {item.author}
@@ -100,7 +100,7 @@ export function TestimonialsSection() {
                     style={{
                       fontSize: '0.76rem',
                       letterSpacing: '0.08em',
-                      color: active === i ? '#0000FF' : 'rgba(17,17,17,0.18)',
+                      color: active === i ? '#0000FF' : 'rgba(17,17,17,0.45)',
                     }}
                   >
                     {item.company}

@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { articles } from '@/lib/data/insights';
@@ -23,7 +23,7 @@ export default function InsightsPage() {
           <ScrollReveal>
             <div className="flex items-center gap-4 mb-8">
               <span className="w-4 h-px bg-[#0000FF]" />
-              <span className="font-body font-light uppercase text-[var(--color-cream)]/40"
+              <span className="font-body font-light uppercase text-ink-meta"
                 style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}>
                 Insights
               </span>
@@ -33,7 +33,7 @@ export default function InsightsPage() {
             <h1 className="font-display font-semibold uppercase text-[var(--color-cream)]"
               style={{ fontSize: 'clamp(2.8rem, 7vw, 7rem)', lineHeight: 0.92, letterSpacing: '-0.025em' }}>
               Perspectives<br />
-              <span style={{ WebkitTextStroke: '1px rgba(17,17,17,0.4)', color: 'transparent' }}>
+              <span className="text-accent">
                 on Digital.
               </span>
             </h1>
@@ -58,19 +58,19 @@ export default function InsightsPage() {
                 />
               </div>
               <div>
-                <span className="inline-block font-body font-light uppercase text-[#0000FF]/70 mb-4"
+                <span className="inline-block font-body font-light uppercase text-blue-link mb-4"
                   style={{ fontSize: '0.72rem', letterSpacing: '0.3em' }}>
                   {featured.category}
                 </span>
-                <h2 className="font-display font-semibold uppercase text-[var(--color-cream)] group-hover:text-[var(--color-cream)]/70 transition-colors"
+                <h2 className="font-display font-semibold uppercase text-[var(--color-cream)] group-hover:text-ink-body transition-colors"
                   style={{ fontSize: 'clamp(1.5rem, 3vw, 2.8rem)', letterSpacing: '-0.02em', lineHeight: 0.95 }}>
                   {featured.title}
                 </h2>
-                <p className="mt-5 font-body font-light text-[var(--color-cream)]/45 leading-relaxed"
+                <p className="mt-5 font-body font-light text-ink-body leading-relaxed"
                   style={{ fontSize: '1rem' }}>
                   {featured.excerpt}
                 </p>
-                <div className="mt-6 flex items-center gap-4 font-body font-light text-[var(--color-cream)]/25 uppercase"
+                <div className="mt-6 flex items-center gap-4 font-body font-light text-ink-meta uppercase"
                   style={{ fontSize: '0.7rem', letterSpacing: '0.22em' }}>
                   <span>{featured.author.name}</span>
                   <span className="w-3 h-px bg-current" />
@@ -101,19 +101,19 @@ export default function InsightsPage() {
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
-                  <span className="inline-block font-body font-light uppercase text-[#0000FF]/60 mb-3"
+                  <span className="inline-block font-body font-light uppercase text-blue-link mb-3"
                     style={{ fontSize: '0.7rem', letterSpacing: '0.28em' }}>
                     {article.category}
                   </span>
-                  <h3 className="font-display font-semibold uppercase text-[var(--color-cream)] group-hover:text-[var(--color-cream)]/70 transition-colors leading-tight"
+                  <h3 className="font-display font-semibold uppercase text-[var(--color-cream)] group-hover:text-ink-body transition-colors leading-tight"
                     style={{ fontSize: 'clamp(1rem, 1.8vw, 1.4rem)', letterSpacing: '-0.01em', lineHeight: 0.95 }}>
                     {article.title}
                   </h3>
-                  <p className="mt-3 font-body font-light text-[var(--color-cream)]/35 line-clamp-2 leading-relaxed"
+                  <p className="mt-3 font-body font-light text-ink-meta line-clamp-2 leading-relaxed"
                     style={{ fontSize: '0.92rem' }}>
                     {article.excerpt}
                   </p>
-                  <div className="mt-4 flex items-center gap-3 font-body font-light text-[var(--color-cream)]/20 uppercase"
+                  <div className="mt-4 flex items-center gap-3 font-body font-light text-ink-meta uppercase"
                     style={{ fontSize: '0.66rem', letterSpacing: '0.2em' }}>
                     <span>{formatDate(article.publishedAt)}</span>
                     <span className="w-2 h-px bg-current" />

@@ -9,8 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        ink: {
+          DEFAULT: '#111111',
+          body:    'rgba(17, 17, 17, 0.82)',
+          meta:    'rgba(17, 17, 17, 0.68)',
+          muted:   'rgba(17, 17, 17, 0.58)',
+        },
         blue: {
           accent: '#0000FF',
+          link:   '#0000CC',
         },
         grey: {
           950: '#0A0A0A',

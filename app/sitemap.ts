@@ -2,8 +2,10 @@ import type { MetadataRoute } from 'next';
 import { services } from '@/lib/data/services';
 import { caseStudies } from '@/lib/data/work';
 import { articles } from '@/lib/data/insights';
+import { industries } from '@/lib/data/industries';
+import { BRAND } from '@/lib/constants/brand';
 
-const BASE = 'https://agence-emea.com';
+const BASE = BRAND.url;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -15,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/insights`,      lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE}/contact`,       lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.8 },
     { url: `${BASE}/privacy`,       lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.2 },
+    { url: `${BASE}/terms`,        lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.2 },
   ];
 
   const serviceRoutes: MetadataRoute.Sitemap = services.map((s) => ({
@@ -38,5 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...workRoutes, ...insightRoutes];
+  const industryRoutes: MetadataRoute.Sitemap = industries.map((i) => ({
+    url: `${BASE}/industries/${i.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.75,
+  }));
+
+  return [...staticRoutes, ...serviceRoutes, ...workRoutes, ...insightRoutes, ...industryRoutes];
 }

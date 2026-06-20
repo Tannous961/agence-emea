@@ -1,9 +1,11 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { caseStudies, getCaseStudyBySlug } from '@/lib/data/work';
+import { BRAND } from '@/lib/constants/brand';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CtaSection } from '@/components/sections/CtaSection';
 
 interface Props { params: Promise<{ slug: string }> }
@@ -17,9 +19,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const study = getCaseStudyBySlug(slug);
   if (!study) return {};
   return {
-    title: `${study.title} — ${study.client} | Agence EMEA`,
+    title: `${study.title} — ${study.client}`,
     description: study.description,
-    alternates: { canonical: `https://agence-emea.com/work/${slug}` },
+    alternates: { canonical: `${BRAND.url}/work/${slug}` },
   };
 }
 
@@ -40,28 +42,32 @@ export default async function CaseStudyPage({ params }: Props) {
           <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/40 to-white/90" />
         </div>
         <div className="relative z-10 container-site pb-16 pt-48">
-          <Link href="/work"
-            className="inline-flex items-center gap-3 font-body font-light uppercase text-[var(--color-cream)]/30 hover:text-[#0000FF] mb-10 transition-colors duration-300"
-            style={{ fontSize: '0.72rem', letterSpacing: '0.3em' }}>
-            <span className="w-4 h-px bg-current" /> All Work
-          </Link>
-          <div className="flex flex-wrap gap-2 mb-5">
-            {study.tags.map((t) => (
-              <span key={t}
-                className="font-body font-light text-[var(--color-cream)]/40 border border-black/[0.15] px-3 py-1"
-                style={{ fontSize: '0.7rem', letterSpacing: '0.2em' }}>
-                {t}
-              </span>
-            ))}
-          </div>
-          <h1 className="font-display font-semibold uppercase text-[var(--color-cream)]"
-            style={{ fontSize: 'clamp(2.2rem, 6vw, 6rem)', lineHeight: 0.92, letterSpacing: '-0.025em', maxWidth: '14ch' }}>
-            {study.title}
-          </h1>
-          <p className="mt-3 font-body font-light text-[var(--color-cream)]/40"
-            style={{ fontSize: '0.94rem', letterSpacing: '0.1em' }}>
-            {study.client} — {study.category}, {study.year}
-          </p>
+          <ScrollReveal>
+            <Breadcrumbs items={[
+              { label: 'Home', href: '/' },
+              { label: 'Work', href: '/work' },
+              { label: study.title },
+            ]} />
+          </ScrollReveal>
+          <ScrollReveal delay={0.05}>
+            <div className="flex flex-wrap gap-2 mb-5">
+              {study.tags.map((t) => (
+                <span key={t}
+                  className="font-body font-light text-ink-meta border border-black/[0.15] px-3 py-1"
+                  style={{ fontSize: '0.7rem', letterSpacing: '0.2em' }}>
+                  {t}
+                </span>
+              ))}
+            </div>
+            <h1 className="font-display font-semibold uppercase text-[var(--color-cream)]"
+              style={{ fontSize: 'clamp(2.2rem, 6vw, 6rem)', lineHeight: 0.92, letterSpacing: '-0.025em', maxWidth: '14ch' }}>
+              {study.title}
+            </h1>
+            <p className="mt-3 font-body font-light text-ink-meta"
+              style={{ fontSize: '0.94rem', letterSpacing: '0.1em' }}>
+              {study.client} — {study.category}, {study.year}
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -98,12 +104,12 @@ export default async function CaseStudyPage({ params }: Props) {
                   <div>
                     <div className="flex items-center gap-4 mb-5">
                       <span className="w-4 h-px bg-[#0000FF]" />
-                      <span className="font-body font-light uppercase text-[#0000FF]/70"
+                      <span className="font-body font-light uppercase text-blue-link"
                         style={{ fontSize: '0.72rem', letterSpacing: '0.3em' }}>
                         {label}
                       </span>
                     </div>
-                    <p className="font-body font-light text-[var(--color-cream)]/55 leading-relaxed"
+                    <p className="font-body font-light text-ink-body leading-relaxed"
                       style={{ fontSize: '1.1rem' }}>
                       {body}
                     </p>
@@ -116,7 +122,7 @@ export default async function CaseStudyPage({ params }: Props) {
             <aside>
               <ScrollReveal delay={0.2}>
                 <div className="sticky top-28 border border-black/[0.07] p-8">
-                  <span className="block font-body font-light uppercase text-[var(--color-cream)]/25 mb-7"
+                  <span className="block font-body font-light uppercase text-ink-meta mb-7"
                     style={{ fontSize: '0.72rem', letterSpacing: '0.3em' }}>
                     Project Details
                   </span>
@@ -127,11 +133,11 @@ export default async function CaseStudyPage({ params }: Props) {
                       { term: 'Year',     detail: study.year },
                     ].map(({ term, detail }) => (
                       <div key={term}>
-                        <dt className="font-body font-light uppercase text-[var(--color-cream)]/25 mb-1"
+                        <dt className="font-body font-light uppercase text-ink-meta mb-1"
                           style={{ fontSize: '0.7rem', letterSpacing: '0.22em' }}>
                           {term}
                         </dt>
-                        <dd className="font-body font-light text-[var(--color-cream)]/70"
+                        <dd className="font-body font-light text-ink-body"
                           style={{ fontSize: '1rem' }}>
                           {detail}
                         </dd>
@@ -139,7 +145,7 @@ export default async function CaseStudyPage({ params }: Props) {
                     ))}
                   </dl>
                   <Link href="/contact"
-                    className="mt-8 w-full flex items-center justify-center gap-3 border border-black/[0.12] hover:border-[#0000FF]/50 font-body font-light uppercase text-[var(--color-cream)]/50 hover:text-[#0000FF] transition-all duration-300 py-3.5"
+                    className="mt-8 w-full flex items-center justify-center gap-3 border border-black/[0.12] hover:border-[#0000FF]/50 font-body font-light uppercase text-ink-body hover:text-[#0000FF] transition-all duration-300 py-3.5"
                     style={{ fontSize: '0.74rem', letterSpacing: '0.28em' }}>
                     Start a Project
                   </Link>

@@ -15,6 +15,24 @@ export const clients: Client[] = [
 
 export const offices: Office[] = [
   {
+    city: 'Beirut',
+    country: 'Lebanon',
+    address: 'Beirut Digital District, Beirut, Lebanon',
+    phone: '+961 1 234 5678',
+    email: 'beirut@agence-emea.com',
+    timezone: 'EET (UTC+2)',
+    markets: ['Lebanon', 'Jordan', 'Levant'],
+  },
+  {
+    city: 'Lagos',
+    country: 'Nigeria',
+    address: 'Victoria Island, Lagos, Nigeria',
+    phone: '+234 1 765 4321',
+    email: 'lagos@agence-emea.com',
+    timezone: 'WAT (UTC+1)',
+    markets: ['Nigeria', 'West Africa'],
+  },
+  {
     city: 'Dubai',
     country: 'UAE',
     address: 'Dubai Design District, Building 7, Dubai, UAE',
@@ -30,41 +48,14 @@ export const offices: Office[] = [
     phone: '+966 11 234 5678',
     email: 'riyadh@agence-emea.com',
     timezone: 'AST (UTC+3)',
-    markets: ['Saudi Arabia'],
-  },
-  {
-    city: 'Cairo',
-    country: 'Egypt',
-    address: 'Smart Village, Building 4, Cairo, Egypt',
-    phone: '+20 2 3456 7890',
-    email: 'cairo@agence-emea.com',
-    timezone: 'EET (UTC+2)',
-    markets: ['Egypt', 'Jordan', 'Lebanon', 'Iraq'],
-  },
-  {
-    city: 'Nairobi',
-    country: 'Kenya',
-    address: 'Westlands Business Park, Nairobi, Kenya',
-    phone: '+254 20 765 4321',
-    email: 'nairobi@agence-emea.com',
-    timezone: 'EAT (UTC+3)',
-    markets: ['Kenya', 'Ethiopia', 'Tanzania', 'Rwanda'],
-  },
-  {
-    city: 'Casablanca',
-    country: 'Morocco',
-    address: 'Casablanca Finance City, Tower A, Casablanca',
-    phone: '+212 5 22 34 56 78',
-    email: 'casablanca@agence-emea.com',
-    timezone: 'WET (UTC+1)',
-    markets: ['Morocco', 'Tunisia', 'Algeria', 'West Africa'],
+    markets: ['Saudi Arabia', 'GCC'],
   },
 ];
 
 export const testimonials: Testimonial[] = [
   {
     quote:
-      'Agence EMEA did not just build us a website — they gave us a brand we are genuinely proud of. The rigour of their process and the beauty of the output are unlike anything we had encountered in the region.',
+      'B&B Agency did not just build us a website — they gave us a brand we are genuinely proud of. The rigour of their process and the beauty of the output are unlike anything we had encountered in the region.',
     author: 'Fatima Al-Sayed',
     role: 'Chief Marketing Officer',
     company: 'Souk & Co.',

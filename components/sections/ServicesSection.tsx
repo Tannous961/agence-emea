@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { services } from '@/lib/data/services';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { SectionViewAllLink } from '@/components/ui/SectionViewAllLink';
 
 export function ServicesSection() {
   const [active, setActive] = useState<string | null>(null);
@@ -37,20 +38,13 @@ export function ServicesSection() {
               <span className="w-4 h-px bg-[#0000FF]" aria-hidden="true" />
               <h2
                 id="services-heading"
-                className="font-body font-light uppercase text-[var(--color-cream)]/40"
+                className="font-body font-light uppercase text-ink-meta"
                 style={{ fontSize: '0.72rem', letterSpacing: '0.35em' }}
               >
                 What We Do
               </h2>
             </div>
-            <Link
-              href="/services"
-              className="hidden md:flex items-center gap-3 font-body font-light uppercase text-[var(--color-cream)]/35 hover:text-[var(--color-cream)] focus-visible:text-[#0000FF] transition-colors duration-400 outline-none"
-              style={{ fontSize: '0.72rem', letterSpacing: '0.3em' }}
-              aria-label="View all services"
-            >
-              All Services <span className="w-6 h-px bg-current inline-block" aria-hidden="true" />
-            </Link>
+            <SectionViewAllLink href="/services" label="All Services" />
           </div>
         </ScrollReveal>
 
@@ -74,7 +68,7 @@ export function ServicesSection() {
 
                       {/* Number */}
                       <span
-                        className="shrink-0 font-body font-light text-[var(--color-cream)]/20 tabular-nums w-8"
+                        className="shrink-0 font-body font-light text-ink-meta tabular-nums w-8"
                         style={{ fontSize: '0.84rem', letterSpacing: '0.1em' }}
                         aria-hidden="true"
                       >
@@ -89,7 +83,7 @@ export function ServicesSection() {
                             fontSize:      'clamp(1.5rem, 3.2vw, 3.2rem)',
                             lineHeight:    0.92,
                             letterSpacing: '-0.02em',
-                            color: on ? 'var(--color-cream)' : 'rgba(17,17,17,0.55)',
+                            color: on ? 'var(--color-cream)' : 'rgba(17,17,17,0.68)',
                           }}
                         >
                           {service.shortTitle}
@@ -106,7 +100,7 @@ export function ServicesSection() {
                               className="overflow-hidden"
                             >
                               <p
-                                className="font-body font-light text-[var(--color-cream)]/40 mt-2.5 max-w-xl leading-relaxed"
+                                className="font-body font-light text-ink-meta mt-2.5 max-w-xl leading-relaxed"
                                 style={{ fontSize: '1rem' }}
                               >
                                 {service.tagline}
@@ -141,7 +135,7 @@ export function ServicesSection() {
 
                       {/* Arrow */}
                       <motion.span
-                        className="shrink-0 font-body font-light text-[var(--color-cream)]/25 group-hover:text-[#0000FF] group-focus-visible:text-[#0000FF] transition-colors duration-300"
+                        className="shrink-0 font-body font-light text-ink-meta group-hover:text-[#0000FF] group-focus-visible:text-blue-link transition-colors duration-300"
                         animate={!pfx ? { x: on && !isMobile ? 4 : 0 } : {}}
                         transition={{ duration: 0.2 }}
                         style={{ fontSize: '1rem' }}
@@ -156,17 +150,6 @@ export function ServicesSection() {
             );
           })}
           <div className="border-t border-black/[0.06]" role="separator" />
-        </div>
-
-        {/* Mobile: link to all services */}
-        <div className="mt-8 md:hidden">
-          <Link
-            href="/services"
-            className="inline-flex items-center gap-3 font-body font-light uppercase text-[var(--color-cream)]/35 hover:text-[var(--color-cream)] transition-colors duration-300"
-            style={{ fontSize: '0.72rem', letterSpacing: '0.3em' }}
-          >
-            All Services <span className="w-5 h-px bg-current inline-block" aria-hidden="true" />
-          </Link>
         </div>
       </div>
     </section>

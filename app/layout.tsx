@@ -3,8 +3,12 @@ import { Barlow_Condensed, Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { CookieBanner } from '@/components/layout/CookieBanner';
+import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
+import { SkipLink } from '@/components/ui/SkipLink';
 import { JsonLd, organizationSchema, websiteSchema } from '@/components/seo/JsonLd';
 import { CustomCursor } from '@/components/ui/CustomCursor';
+import { BRAND } from '@/lib/constants/brand';
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ['latin'],
@@ -21,10 +25,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://agence-emea.com'),
+  metadataBase: new URL(BRAND.url),
   title: {
-    default: 'Agence EMEA — Premium Digital Agency for the Middle East & Africa',
-    template: '%s | Agence EMEA',
+    default: `${BRAND.name} — Premium Digital Agency for the Middle East & Africa`,
+    template: `%s | ${BRAND.name}`,
   },
   description:
     'A premium digital agency serving ambitious brands across the Middle East and Africa. Brand strategy, web development, mobile apps, AI and digital marketing.',
@@ -41,8 +45,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://agence-emea.com',
-    siteName: 'Agence EMEA',
+    url: BRAND.url,
+    siteName: BRAND.name,
     images: [{ url: '/og-default.jpg', width: 1200, height: 630 }],
   },
   twitter: {
@@ -55,7 +59,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
   },
   alternates: {
-    canonical: 'https://agence-emea.com',
+    canonical: BRAND.url,
   },
 };
 
@@ -67,12 +71,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${barlowCondensed.variable} ${inter.variable}`}
     >
       <body>
+        <SkipLink />
         <JsonLd data={organizationSchema} />
         <JsonLd data={websiteSchema} />
         <CustomCursor />
+        <GoogleAnalytics />
         <Header />
-        <main id="main-content">{children}</main>
+        <main id="main-content" tabIndex={-1} className="pb-[var(--cookie-banner-height,0px)]">{children}</main>
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );

@@ -3,9 +3,6 @@ import { Hero } from '@/components/sections/Hero';
 import { IntroSection } from '@/components/sections/IntroSection';
 import { ServicesSection } from '@/components/sections/ServicesSection';
 import { WhyUsSection } from '@/components/sections/WhyUsSection';
-import { FeaturedWork } from '@/components/sections/FeaturedWork';
-import { RegionalSection } from '@/components/sections/RegionalSection';
-import { ClientLogos } from '@/components/sections/ClientLogos';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { InsightsTeaser } from '@/components/sections/InsightsTeaser';
 import { CtaSection } from '@/components/sections/CtaSection';
@@ -28,10 +25,7 @@ export default function HomePage() {
       <IntroSection />
       <ServicesSection />
       <WhyUsSection />
-      <FeaturedWork />
       <IndustriesSection />
-      <RegionalSection />
-      <ClientLogos />
       <TestimonialsSection />
       <InsightsTeaser />
       <CtaSection />

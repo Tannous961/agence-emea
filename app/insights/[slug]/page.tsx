@@ -6,6 +6,7 @@ import { BRAND } from '@/lib/constants/brand';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { formatDate } from '@/lib/utils';
+import { parseArticleBody, renderArticleParagraph } from '@/lib/utils/article-body';
 import { CtaSection } from '@/components/sections/CtaSection';
 
 interface Props { params: Promise<{ slug: string }> }
@@ -26,30 +27,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const PLACEHOLDER_BODY = `The digital landscape across the Middle East and Africa is undergoing a profound transformation. Organisations that move decisively today will define their category for the next decade; those that wait will find themselves playing an expensive game of catch-up.
-
-We have spent the past several years embedded in these markets — running campaigns, building products, and advising leadership teams from Casablanca to Nairobi. What follows is an honest assessment of where the opportunity lies and what it will take to capture it.
-
-**The shift is structural, not cyclical**
-
-It would be convenient to dismiss the current wave of digital adoption as a temporary correction. The data suggests otherwise. Mobile internet penetration across the GCC hit 98% in 2024. Smartphone commerce in Sub-Saharan Africa grew at 47% year-on-year. Arabic-language search volume doubled between 2021 and 2024. These are structural changes in how people discover, evaluate, and buy.
-
-**What this means for brands**
-
-The organisations winning right now share three characteristics: they have invested in owning their first-party data, they have built digital experiences that are actually good (not just functional), and they treat content as a strategic asset rather than an afterthought.
-
-**Where to focus**
-
-For most organisations in the MEA region, the highest-leverage investment is still getting the fundamentals right: a fast, well-designed website, a coherent content and SEO programme in the primary language of your customer, and a measurement framework that connects digital activity to business outcomes.
-
-The window of differentiation through digital excellence remains open. It will not stay open forever.`;
-
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
   if (!article) notFound();
 
-  const bodyParagraphs = PLACEHOLDER_BODY.trim().split('\n\n');
+  const bodyParagraphs = parseArticleBody(article.content);
 
   return (
     <>
@@ -121,20 +104,25 @@ export default async function ArticlePage({ params }: Props) {
             {/* Body paragraphs */}
             <div className="space-y-6">
               {bodyParagraphs.map((para, i) => {
-                if (para.startsWith('**') && para.endsWith('**')) {
-                  const text = para.slice(2, -2);
+                const block = renderArticleParagraph(para, i);
+                if (block.type === 'heading') {
                   return (
-                    <h2 key={i} className="font-display font-semibold uppercase text-[var(--color-cream)] mt-12 mb-2"
-                      style={{ fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', letterSpacing: '-0.01em' }}>
-                      {text}
+                    <h2
+                      key={block.key}
+                      className="font-display font-semibold uppercase text-[var(--color-cream)] mt-12 mb-2"
+                      style={{ fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', letterSpacing: '-0.01em' }}
+                    >
+                      {block.text}
                     </h2>
                   );
                 }
-                const cleaned = para.replace(/\*\*(.*?)\*\*/g, '$1');
                 return (
-                  <p key={i} className="font-body font-light text-ink-body leading-relaxed"
-                    style={{ fontSize: '1.06rem' }}>
-                    {cleaned}
+                  <p
+                    key={block.key}
+                    className="font-body font-light text-ink-body leading-relaxed"
+                    style={{ fontSize: '1.06rem' }}
+                  >
+                    {block.text}
                   </p>
                 );
               })}

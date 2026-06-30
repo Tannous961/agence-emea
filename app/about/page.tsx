@@ -120,7 +120,7 @@ export default function AboutPage() {
                   {[
                     { v: '10+', l: 'Years' },
                     { v: '70', l: 'Specialists' },
-                    { v: '5', l: 'Offices' },
+                    { v: '4', l: 'Offices' },
                   ].map(({ v, l }) => (
                     <div key={l}>
                       <span className="block font-display font-semibold text-[var(--color-cream)]"

@@ -1,6 +1,6 @@
-# Agence EMEA — Website
+# B&B Agency — Website
 
-Production-grade marketing website for a premium digital agency operating across the Middle East and Africa.
+Production-grade marketing website for **B&B Agency**, a premium digital agency operating across the Middle East and Africa. The site is served at [agence-emea.com](https://agence-emea.com).
 
 ## Stack
 
@@ -10,6 +10,7 @@ Production-grade marketing website for a premium digital agency operating across
 - **Framer Motion** for scroll animations
 - **next/font** for self-hosted Google Fonts (Barlow Condensed + Inter)
 - **next/image** for responsive, optimised images
+- **Resend** for contact form email delivery
 - Static generation (SSG) on all pages; zero client-side-only primary content
 
 ---
@@ -18,6 +19,7 @@ Production-grade marketing website for a premium digital agency operating across
 
 ```bash
 npm install
+cp .env.example .env.local   # then fill in your keys
 npm run dev          # http://localhost:3000
 npm run build        # production build
 npm run start        # serve production build
@@ -55,8 +57,10 @@ components/
   seo/                  JsonLd structured data
 
 lib/
+  constants/brand.ts    BRAND name, domain, emails
   types/index.ts        All shared TypeScript interfaces
   data/                 services.ts, work.ts, insights.ts, team.ts, clients.ts
+  email/                send-contact-email.ts (Resend)
   utils.ts              cn(), formatDate(), slugify()
 ```
 
@@ -75,25 +79,26 @@ All images currently use **Unsplash URLs** via `next/image`. To replace with rea
 3. Update hero image in `components/sections/Hero.tsx`
 4. Remove the `images.remotePatterns` entry for `images.unsplash.com` from `next.config.ts` once no Unsplash URLs remain
 
+Client logos live in `public/logos/` and are listed in `lib/data/clients.ts`.
+
 ---
 
 ## Adding a Case Study
 
 1. Open `lib/data/work.ts`
 2. Add a new object to the `caseStudies` array following the `CaseStudy` interface in `lib/types/index.ts`
-3. Set `featured: true` to include it in the homepage grid (shows first 3 featured)
+3. Set `featured: true` to mark it as featured in data (used by `getFeaturedWork()`)
 4. The slug becomes the URL: `/work/your-slug`
 
 ---
 
 ## Adding a Blog/Insights Article
 
-1. Open `lib/data/insights.ts`
-2. Add a new object to the `articles` array following the `Article` interface
+1. Add metadata to `articlesBase` in `lib/data/insights.ts`
+2. Add the full article body to `lib/data/insights-content.ts` (keyed by slug)
 3. The slug becomes the URL: `/insights/your-slug`
-4. Update `content` (currently uses a placeholder body) for full article text
 
-For a CMS-powered approach, replace the `articles` array with a Sanity or Contentful fetch. The page components are already async and SSG-ready.
+For a CMS-powered approach, replace the data files with a Sanity or Contentful fetch. The page components are already async and SSG-ready.
 
 ---
 
@@ -118,29 +123,25 @@ Key values:
 - Display font: Barlow Condensed (variable: `--font-barlow-condensed`)
 - Body font: Inter (variable: `--font-inter`)
 
+Brand constants (`name`, `domain`, `emails`) are centralised in `lib/constants/brand.ts`.
+
 ---
 
 ## Contact Form
 
-The form at `/contact` uses a **Next.js Server Action** (`app/actions/contact.ts`). Currently it logs submissions to the console.
+The form at `/contact` uses a **Next.js Server Action** (`app/actions/contact.ts`) and sends email via **Resend** (`lib/email/send-contact-email.ts`).
 
-To wire it to an email provider:
+Required environment variables:
 
-```ts
-// app/actions/contact.ts
-import { Resend } from 'resend'; // or @sendgrid/mail, nodemailer, etc.
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-await resend.emails.send({
-  from: 'website@agence-emea.com',
-  to: 'hello@agence-emea.com',
-  subject: `New enquiry from ${name}`,
-  text: message,
-});
+```bash
+RESEND_API_KEY=re_xxxxxxxxxxxx
+CONTACT_EMAIL=hello@agence-emea.com
+RESEND_FROM=B&B Agency <noreply@agence-emea.com>
 ```
 
-Add your API key to `.env.local` — never in client code.
+In development, if `RESEND_API_KEY` is not set, submissions are logged to the console instead of sent. In production, a missing key returns an error to the user.
+
+The form includes a honeypot field for basic spam protection.
 
 ---
 
@@ -171,6 +172,10 @@ npx vercel          # or push to GitHub and connect via vercel.com
 ```
 
 Set environment variables in the Vercel dashboard:
-- `RESEND_API_KEY` (or equivalent) for the contact form
+
+- `RESEND_API_KEY` — required for contact form in production
+- `CONTACT_EMAIL` — inbox for enquiries (defaults to `hello@agence-emea.com`)
+- `RESEND_FROM` — verified sender address in Resend
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID` — optional; Google Analytics loads only after cookie consent
 
 Recommended Vercel settings: Framework = Next.js, Node = 20.x, region closest to Dubai (eu-central-1 or me-south-1).

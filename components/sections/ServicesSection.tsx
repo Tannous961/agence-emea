@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { services } from '@/lib/data/services';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { SectionViewAllLink } from '@/components/ui/SectionViewAllLink';
+import { ArrowLinkIcon } from '@/components/ui/ArrowLinkIcon';
 
 export function ServicesSection() {
   const [active, setActive] = useState<string | null>(null);
@@ -134,15 +135,7 @@ export function ServicesSection() {
                       </AnimatePresence>
 
                       {/* Arrow */}
-                      <motion.span
-                        className="shrink-0 font-body font-light text-ink-meta group-hover:text-[#0000FF] group-focus-visible:text-blue-link transition-colors duration-300"
-                        animate={!pfx ? { x: on && !isMobile ? 4 : 0 } : {}}
-                        transition={{ duration: 0.2 }}
-                        style={{ fontSize: '1rem' }}
-                        aria-hidden="true"
-                      >
-                        ↗
-                      </motion.span>
+                      <ArrowLinkIcon className="group-hover:border-[#0000FF] group-hover:text-[#0000FF] group-focus-visible:border-[#0000FF] group-focus-visible:text-[#0000FF]" />
                     </div>
                   </Link>
                 </div>

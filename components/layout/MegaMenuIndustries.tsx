@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getGroupedIndustries } from '@/lib/data/industries';
+import { ArrowLinkIcon } from '@/components/ui/ArrowLinkIcon';
 
 interface Props {
   id: string;
@@ -67,12 +68,7 @@ export function MegaMenuIndustries({ id, isVisible, onMouseEnter, onMouseLeave }
                           >
                             {ind.name}
                           </span>
-                          <span
-                            className="font-body text-ink-muted group-hover:text-accent transition-colors duration-200 shrink-0"
-                            aria-hidden="true"
-                          >
-                            ↗
-                          </span>
+                          <ArrowLinkIcon className="w-7 h-7 group-hover:border-[#0000FF] group-hover:text-[#0000FF]" />
                         </Link>
                       </motion.li>
                     ))}

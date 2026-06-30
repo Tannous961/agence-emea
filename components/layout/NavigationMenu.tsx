@@ -86,8 +86,8 @@ export function NavigationMenu({ id, isOpen, onClose, returnFocusRef }: Navigati
   }, [isOpen, onClose]);
 
   const menuVariants = {
-    closed: { opacity: 0, y: prefersReducedMotion ? 0 : '-100%' },
-    open:   { opacity: 1, y: '0%' },
+    closed: { opacity: 0 },
+    open:   { opacity: 1 },
   };
 
   const itemVariants = {
@@ -126,7 +126,7 @@ export function NavigationMenu({ id, isOpen, onClose, returnFocusRef }: Navigati
           exit="closed"
           transition={{ duration: prefersReducedMotion ? 0.01 : 0.45, ease: [0.76, 0, 0.24, 1] }}
         >
-          <div className="container-site flex flex-col justify-end pb-16 pt-28 min-h-full">
+          <div className="container-site flex flex-col pt-28 pb-[max(4rem,env(safe-area-inset-bottom))] min-h-full">
             <nav aria-label="Mobile navigation">
               <ul className="space-y-1">
                 {navEntries.map((entry, i) => (
@@ -193,7 +193,7 @@ export function NavigationMenu({ id, isOpen, onClose, returnFocusRef }: Navigati
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
                               transition={{ duration: prefersReducedMotion ? 0.01 : 0.3, ease: 'easeOut' }}
-                              className="overflow-hidden pl-1 mt-4 mb-2 space-y-2"
+                              className="overflow-hidden pl-1 mt-3 mb-4 space-y-1 border-l border-black/[0.06] ml-1"
                             >
                               {entry.children.map((child) => (
                                 <li key={child.href}>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Industry, IndustryGroup } from '@/lib/types';
 import { getGroupedIndustries } from '@/lib/data/industries';
+import { ArrowLinkIcon } from '@/components/ui/ArrowLinkIcon';
 
 type GroupWithIndustries = IndustryGroup & { industries: Industry[] };
 
@@ -38,12 +39,7 @@ function DetailedGroupSection({ group }: { group: GroupWithIndustries }) {
               >
                 {ind.name}
               </h3>
-              <span
-                className="shrink-0 font-body font-light text-ink-meta group-hover:text-accent transition-colors duration-300"
-                aria-hidden="true"
-              >
-                ↗
-              </span>
+              <ArrowLinkIcon className="group-hover:border-[#0000FF] group-hover:text-[#0000FF]" />
             </div>
             <p className="font-body font-light text-ink-meta leading-relaxed line-clamp-2" style={{ fontSize: '0.95rem' }}>
               {ind.description}
@@ -96,12 +92,7 @@ export function IndustriesGroupedView({ variant = 'compact', group }: Industries
                       {ind.name}
                     </span>
                   </span>
-                  <span
-                    className="shrink-0 pt-0.5 font-body text-ink-muted group-hover:text-accent transition-colors duration-300"
-                    aria-hidden="true"
-                  >
-                    ↗
-                  </span>
+                  <ArrowLinkIcon className="w-7 h-7 group-hover:border-[#0000FF] group-hover:text-[#0000FF]" />
                 </Link>
               </li>
             ))}

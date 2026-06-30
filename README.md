@@ -151,7 +151,7 @@ The form includes a honeypot field for basic spam protection.
 - **JSON-LD**: Organization + WebSite schemas in the root layout; extend with `Service` or `Article` schemas on detail pages using `<JsonLd data={...} />` from `components/seo/JsonLd.tsx`
 - **Sitemap**: auto-generated at `/sitemap.xml` via `app/sitemap.ts`
 - **robots.txt**: auto-generated via `app/robots.ts`
-- **OG image**: replace `/public/og-default.jpg` with a real 1200×630 image, or generate dynamically with `next/og`
+- **OG image**: auto-generated at build time via `app/opengraph-image.tsx` (1200×630); customise the template or replace with a static asset in `public/`
 
 ---
 

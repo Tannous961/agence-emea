@@ -8,6 +8,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { formatDate } from '@/lib/utils';
 import { parseArticleBody, renderArticleParagraph } from '@/lib/utils/article-body';
 import { CtaSection } from '@/components/sections/CtaSection';
+import { JsonLd, articleSchema } from '@/components/seo/JsonLd';
 
 interface Props { params: Promise<{ slug: string }> }
 
@@ -36,6 +37,7 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={articleSchema(article)} />
       {/* Hero */}
       <section className="bg-[#F5F5F5] pt-44 pb-16 border-b border-black/[0.05]">
         <div className="container-site max-w-4xl">

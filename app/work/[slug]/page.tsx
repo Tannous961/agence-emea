@@ -7,6 +7,7 @@ import { BRAND } from '@/lib/constants/brand';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CtaSection } from '@/components/sections/CtaSection';
+import { JsonLd, caseStudySchema } from '@/components/seo/JsonLd';
 
 interface Props { params: Promise<{ slug: string }> }
 
@@ -32,6 +33,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={caseStudySchema(study)} />
       {/* Cinematic hero */}
       <section className="relative bg-[#F5F5F5] flex flex-col justify-end overflow-hidden"
         style={{ minHeight: '75vh' }}>

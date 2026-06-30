@@ -8,6 +8,7 @@ import { InsightsTeaser } from '@/components/sections/InsightsTeaser';
 import { CtaSection } from '@/components/sections/CtaSection';
 import { IndustriesSection } from '@/components/sections/IndustriesSection';
 import { ClientLogos } from '@/components/sections/ClientLogos';
+import { FeaturedWork } from '@/components/sections/FeaturedWork';
 import { BRAND } from '@/lib/constants/brand';
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default function HomePage() {
       <IntroSection />
       <ClientLogos />
       <ServicesSection />
+      <FeaturedWork />
       <WhyUsSection />
       <IndustriesSection />
       <TestimonialsSection />

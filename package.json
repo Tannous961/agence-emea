@@ -1,5 +1,6 @@
 {
-  "name": "agence-emea",
+  "name": "bb-agency",
+  "description": "Marketing website for B&B Agency — premium digital agency for the Middle East and Africa",
   "version": "0.1.0",
   "private": true,
   "scripts": {

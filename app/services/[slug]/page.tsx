@@ -7,6 +7,7 @@ import { BRAND } from '@/lib/constants/brand';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { DetailPageHero } from '@/components/sections/DetailPageHero';
 import { CtaSection } from '@/components/sections/CtaSection';
+import { JsonLd, serviceSchema } from '@/components/seo/JsonLd';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -37,6 +38,7 @@ export default async function ServicePage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={serviceSchema(service)} />
       <DetailPageHero
         eyebrow="Service"
         title={service.title}

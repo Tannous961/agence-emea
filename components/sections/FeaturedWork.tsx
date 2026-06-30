@@ -5,12 +5,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import type { CaseStudy } from '@/lib/types';
-import { caseStudies } from '@/lib/data/work';
+import { getFeaturedWork } from '@/lib/data/work';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { SectionViewAllLink } from '@/components/ui/SectionViewAllLink';
 
 export function FeaturedWork() {
-  const [hero, second, third] = caseStudies;
+  const [hero, second, third] = getFeaturedWork();
 
   return (
     <section className="bg-[#F5F5F5] section-pad" aria-labelledby="work-heading">

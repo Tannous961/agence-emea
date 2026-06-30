@@ -9,6 +9,7 @@ import { CtaSection } from '@/components/sections/CtaSection';
 import { IndustriesSection } from '@/components/sections/IndustriesSection';
 import { ClientLogos } from '@/components/sections/ClientLogos';
 import { FeaturedWork } from '@/components/sections/FeaturedWork';
+import { RegionalSection } from '@/components/sections/RegionalSection';
 import { BRAND } from '@/lib/constants/brand';
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ export default function HomePage() {
       <WhyUsSection />
       <IndustriesSection />
       <TestimonialsSection />
+      <RegionalSection />
       <InsightsTeaser />
       <CtaSection />
     </>

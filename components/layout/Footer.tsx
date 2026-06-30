@@ -14,6 +14,7 @@ const nav = {
     { label: 'Work',       href: '/work' },
     { label: 'Industries', href: '/industries' },
     { label: 'About',      href: '/about' },
+    { label: 'Careers',    href: '/careers' },
     { label: 'Insights',   href: '/insights' },
     { label: 'Contact',    href: '/contact' },
     { label: 'Privacy',    href: '/privacy' },

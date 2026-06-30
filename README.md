@@ -165,6 +165,34 @@ The codebase is structured for future Arabic/French localisation:
 
 ---
 
+## Launch Checklist
+
+Technical work on `main` is largely complete. Before going live, finish these items:
+
+### Required for production
+
+- [ ] Set `RESEND_API_KEY`, `RESEND_FROM`, and `CONTACT_EMAIL` in Vercel (or your host)
+- [ ] Verify the contact form sends email end-to-end on the production domain
+- [ ] Replace Unsplash URLs with real photography in `lib/data/` and section components
+- [ ] Update case studies in `lib/data/work.ts` with authentic client work (or remove placeholders)
+- [ ] Update team bios and portraits in `lib/data/team.ts`
+- [ ] Add real social profile URLs in `components/layout/Footer.tsx`
+- [ ] Confirm legal copy on `/privacy` and `/terms` with counsel
+
+### Branding notes
+
+- **Display name:** B&B Agency (`lib/constants/brand.ts`)
+- **Alternate name / domain:** Agence EMEA → `agence-emea.com`
+- **Package name:** `bb-agency` (npm); GitHub repo may still be named `agence-emea`
+
+### Optional post-launch
+
+- [ ] Arabic and French localisation (`app/[locale]/`)
+- [ ] CMS for insights and work (Sanity, Contentful)
+- [ ] CAPTCHA / rate limiting on the contact form
+
+---
+
 ## Deployment (Vercel)
 
 ```bash

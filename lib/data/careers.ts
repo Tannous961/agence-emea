@@ -36,3 +36,7 @@ export const openings: JobOpening[] = [
       'Partner with ambitious brands across the GCC on positioning, digital roadmaps, and multi-market go-to-market programmes.',
   },
 ];
+
+export function getOpeningBySlug(slug: string): JobOpening | undefined {
+  return openings.find((o) => o.slug === slug);
+}

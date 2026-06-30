@@ -18,6 +18,7 @@ export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: BRAND.name,
+  alternateName: BRAND.alternateName,
   url: BRAND.url,
   logo: `${BRAND.url}/logo.svg`,
   sameAs: [

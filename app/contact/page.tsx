@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { offices } from '@/lib/data/clients';
 import { ContactForm } from '@/components/forms/ContactForm';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
@@ -57,7 +58,9 @@ export default function ContactPage() {
           {/* Form */}
           <div className="lg:col-span-2">
             <ScrollReveal>
-              <ContactForm />
+              <Suspense fallback={<p className="font-body font-light text-ink-meta">Loading form…</p>}>
+                <ContactForm />
+              </Suspense>
             </ScrollReveal>
           </div>
 

@@ -1,7 +1,9 @@
 'use client';
 
-import { useActionState, useState, useCallback } from 'react';
+import { useActionState, useState, useCallback, useEffect, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { submitContact, type ContactFormState } from '@/app/actions/contact';
+import { getOpeningBySlug } from '@/lib/data/careers';
 import { cn } from '@/lib/utils';
 
 const initial: ContactFormState = { status: 'idle' };
@@ -28,9 +30,23 @@ function validateMessage(v: string) {
 }
 
 export function ContactForm() {
+  const searchParams = useSearchParams();
+  const messageRef = useRef<HTMLTextAreaElement>(null);
   const [state, action, pending] = useActionState(submitContact, initial);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    const roleSlug = searchParams.get('role');
+    const field = messageRef.current;
+    if (!roleSlug || !field || field.value.trim()) return;
+
+    const role = getOpeningBySlug(roleSlug);
+    if (role) {
+      field.value = `Application for: ${role.title} (${role.location})\n\n`;
+      field.focus();
+    }
+  }, [searchParams]);
 
   const validate = useCallback((name: string, value: string) => {
     let error = '';
@@ -183,6 +199,7 @@ export function ContactForm() {
           </label>
           <textarea
             id="message" name="message" rows={5} required
+            ref={messageRef}
             aria-required="true"
             aria-invalid={touched.message && !!errors.message}
             aria-describedby={errors.message && touched.message ? 'error-message' : undefined}
